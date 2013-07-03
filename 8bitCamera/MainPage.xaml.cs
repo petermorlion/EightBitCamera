@@ -26,7 +26,7 @@ namespace EightBitCamera
         private int savedCounter = 0;
         PhotoCamera _photoCamera;
         MediaLibrary mediaLibrary = new MediaLibrary();
-        private Pixelator _pixelator = new Pixelator(8);
+        private Pixelator _pixelator = new Pixelator(6);
 
         public MainPage()
         {
