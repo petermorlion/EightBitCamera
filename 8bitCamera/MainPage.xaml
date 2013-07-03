@@ -29,14 +29,7 @@
                     FontSize="26" 
                     FontWeight="ExtraBold" 
                     Height="75" />
-            <Canvas x:Name="viewfinderCanvas" Width="100" Height="100" HorizontalAlignment="Left">
-                <Canvas.Background>
-                    <VideoBrush x:Name="viewfinderBrush" />
-                </Canvas.Background>
-            </Canvas>
-            <ScrollViewer>
-                <StackPanel x:Name="thumbnailsPanel" Orientation="Vertical" />
-            </ScrollViewer>
+            
         </StackPanel>
     </Grid>
  

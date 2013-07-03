@@ -41,9 +41,7 @@ namespace EightBitCamera
                 _photoCamera.Initialized += OnCameraInitialized;
                 _photoCamera.CaptureCompleted += OnCameraCaptureCompleted;
                 _photoCamera.CaptureImageAvailable += OnCameraCaptureImageAvailable;
-                _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;
-                
-                viewfinderBrush.SetSource(_photoCamera);
+                _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;   
             }
             else
             {
@@ -81,40 +79,6 @@ namespace EightBitCamera
                 return;
 
             _photoCamera.CaptureImage();
-        }
-
-        private void LoadThumbnails()
-        {
-            Deployment.Current.Dispatcher.BeginInvoke(delegate()
-            {
-                thumbnailsPanel.Children.Clear();
-            });
-
-            using (var isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
-            {
-                var fileNames = isolatedStorageFile.GetFileNames("*_th.jpg");
-                foreach (var fileName in fileNames)
-                {
-                    byte[] data;
-                    using (var isolatedStorageFileStream = isolatedStorageFile.OpenFile(fileName, FileMode.Open, FileAccess.Read))
-                    {
-                        data = new byte[isolatedStorageFileStream.Length];
-                        isolatedStorageFileStream.Read(data, 0, data.Length);
-                        isolatedStorageFileStream.Close();
-                    }
-                    Deployment.Current.Dispatcher.BeginInvoke(delegate()
-                    {
-                        var memoryStream = new MemoryStream(data);
-                        var bitmap = new BitmapImage();
-                        bitmap.SetSource(memoryStream);
-                        var image = new Image();
-                        image.Height = 24;
-                        image.Width = 24;
-                        image.Source = bitmap;
-                        thumbnailsPanel.Children.Add(image);
-                    });
-                }
-            }
         }
 
         private void UpdateViewFinder(object state)
@@ -186,7 +150,6 @@ namespace EightBitCamera
                         }
                     }
                 }
-                LoadThumbnails();
             }
             finally
             {
