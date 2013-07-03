@@ -156,5 +156,10 @@ namespace EightBitCamera
                 e.ImageStream.Close();
             }
         }
+
+        private void SettingsButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+        }
     }
 }
