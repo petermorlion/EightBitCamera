@@ -23,12 +23,11 @@
         <Image x:Name="bitPreview" Width="570" Height="480"></Image>
         
         <StackPanel Grid.Column="1">
-            <Button x:Name="shutterButton" 
-                    Content="SH" 
-                    Click="ShutterButtonClick" 
-                    FontSize="26" 
-                    FontWeight="ExtraBold" 
-                    Height="75" />
+            <Button Click="ShutterButtonClick" BorderThickness="0">
+                <Button.Content>
+                    <Image Source="/camera.png"></Image>
+                </Button.Content>
+            </Button>
             <Button Click="SettingsButtonClick" BorderThickness="0">
                 <Button.Content>
                     <Image Source="/settings.png"></Image>

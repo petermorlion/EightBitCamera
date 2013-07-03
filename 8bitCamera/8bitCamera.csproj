@@ -96,6 +96,7 @@
     <Content Include="Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Content Include="camera.png" />
     <Content Include="settings.png" />
     <Content Include="SplashScreenImage.jpg" />
   </ItemGroup>
