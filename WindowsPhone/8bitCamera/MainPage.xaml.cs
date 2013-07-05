@@ -25,9 +25,10 @@ namespace EightBitCamera
     {
         private int _savedCounter = 0;
         PhotoCamera _photoCamera;
-        readonly MediaLibrary mediaLibrary = new MediaLibrary();
+        readonly MediaLibrary _mediaLibrary = new MediaLibrary();
         private readonly Pixelator _pixelator = new Pixelator(6);
         private bool _cameraCaptureInProgress;
+        private WriteableBitmap _wb;
 
         public MainPage()
         {
@@ -131,20 +132,24 @@ namespace EightBitCamera
             int[] buffer = new int[max];
 
             //TODO: just before GetPreviewBufferArgb32 to avoid exception, but would be better in beginning of method only. Necesary because of not working with Timer?
-            if (_cameraCaptureInProgress)
-                return;
+            try
+            {
+                _photoCamera.GetPreviewBufferArgb32(buffer);
 
-            _photoCamera.GetPreviewBufferArgb32(buffer);
+                buffer = _pixelator.Pixelate(buffer, width, height);
 
-            buffer = _pixelator.Pixelate(buffer, width, height);
-
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-                                                          {
-                                                              var wb = new WriteableBitmap(width, height);
-                                                              bitPreview.Source = wb;
-                                                              buffer.CopyTo(wb.Pixels, 0);
-                                                              wb.Invalidate();
-                                                          });
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                {
+                    _wb = new WriteableBitmap(width, height);
+                    bitPreview.Source = _wb;
+                    buffer.CopyTo(_wb.Pixels, 0);
+                    _wb.Invalidate();
+                });
+            }
+            catch (Exception)
+            {
+                // TODO: catch more specific exception if possible  
+            }
         }
 
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
@@ -152,25 +157,13 @@ namespace EightBitCamera
             var fileName = "8bitImage" + _savedCounter + ".jpg";
             try
             {
-                mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
-                e.ImageStream.Seek(0, SeekOrigin.Begin);
-                using (var isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
-                {
-                    using (var targetStream = isolatedStorageFile.OpenFile(fileName, FileMode.Create, FileAccess.Write))
-                    {
-                        var readBuffer = new byte[4096];
-                        var bytesRead = -1;
-
-                        while ((bytesRead = e.ImageStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
-                        {
-                            targetStream.Write(readBuffer, 0, bytesRead);
-                        }
-                    }
-                }
+                var stream = new MemoryStream();
+                _wb.SaveJpeg(stream, (int)_photoCamera.PreviewResolution.Width, (int)_photoCamera.PreviewResolution.Height, 0, 100);
+                _mediaLibrary.SavePictureToCameraRoll(fileName, stream.ToArray());
             }
-            finally
+            catch (Exception exception)
             {
-                e.ImageStream.Close();
+                // TODO: do something with exception?
             }
         }
 
