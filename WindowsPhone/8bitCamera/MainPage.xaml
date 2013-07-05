@@ -22,7 +22,7 @@
 
         <Image x:Name="bitPreview" Width="570" Height="480"></Image>
         
-        <StackPanel Grid.Column="1">
+        <!--<StackPanel Grid.Column="1">
             <Button Click="ShutterButtonClick" BorderThickness="0">
                 <Button.Content>
                     <Image Source="/camera.png"></Image>
@@ -33,7 +33,12 @@
                     <Image Source="/settings.png"></Image>
                 </Button.Content>
             </Button>
-        </StackPanel>
+        </StackPanel>-->
     </Grid>
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/settings.png" Click="OnAboutIconClicked" Text="Settings"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
  
 </phone:PhoneApplicationPage>

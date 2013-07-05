@@ -23,14 +23,39 @@ namespace EightBitCamera
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private int savedCounter = 0;
+        private int _savedCounter = 0;
         PhotoCamera _photoCamera;
-        MediaLibrary mediaLibrary = new MediaLibrary();
-        private Pixelator _pixelator = new Pixelator(6);
+        readonly MediaLibrary mediaLibrary = new MediaLibrary();
+        private readonly Pixelator _pixelator = new Pixelator(6);
 
         public MainPage()
         {
             InitializeComponent();
+            CameraButtons.ShutterKeyHalfPressed += OnCameraButtonShutterKeyHalfPressed;
+            CameraButtons.ShutterKeyPressed += OnCameraButtonShutterKeyPressed;
+        }
+
+        private void OnCameraButtonShutterKeyPressed(object sender, EventArgs e)
+        {
+            if (_photoCamera == null)
+                return;
+
+            _photoCamera.CaptureImage();
+        }
+
+        private void OnCameraButtonShutterKeyHalfPressed(object sender, EventArgs e)
+        {
+            if (_photoCamera == null) 
+                return;
+
+            try
+            {
+                _photoCamera.Focus();
+            }
+            catch (Exception)
+            {
+                //TODO: catch correct exception (if it exists)
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -39,7 +64,6 @@ namespace EightBitCamera
             {
                 _photoCamera = new PhotoCamera(CameraType.Primary);
                 _photoCamera.Initialized += OnCameraInitialized;
-                _photoCamera.CaptureCompleted += OnCameraCaptureCompleted;
                 _photoCamera.CaptureImageAvailable += OnCameraCaptureImageAvailable;
                 _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;   
             }
@@ -67,18 +91,9 @@ namespace EightBitCamera
             {
                 _photoCamera.Dispose();
 
-                _photoCamera.CaptureCompleted -= OnCameraCaptureCompleted;
                 _photoCamera.CaptureImageAvailable -= OnCameraCaptureImageAvailable;
                 _photoCamera.CaptureThumbnailAvailable -= OnCameraCaptureThumbnailAvailable;
             }
-        }
-
-        private void ShutterButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (_photoCamera == null)
-                return;
-
-            _photoCamera.CaptureImage();
         }
 
         private void UpdateViewFinder(object state)
@@ -102,7 +117,7 @@ namespace EightBitCamera
 
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
         {
-            var fileName = "8bitImage" + savedCounter + ".jpg";
+            var fileName = "8bitImage" + _savedCounter + ".jpg";
             try
             {
                 mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
@@ -127,14 +142,9 @@ namespace EightBitCamera
             }
         }
 
-        private void OnCameraCaptureCompleted(object sender, CameraOperationCompletedEventArgs e)
-        {
-            savedCounter++;
-        }
-
         private void OnCameraCaptureThumbnailAvailable(object sender, ContentReadyEventArgs e)
         {
-            var fileName = "8bitImage" + savedCounter + "_th.jpg";
+            var fileName = "8bitImage" + _savedCounter + "_th.jpg";
             try
             {
                 using (var isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
