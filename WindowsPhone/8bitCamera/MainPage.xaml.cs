@@ -27,6 +27,7 @@ namespace EightBitCamera
         PhotoCamera _photoCamera;
         readonly MediaLibrary mediaLibrary = new MediaLibrary();
         private readonly Pixelator _pixelator = new Pixelator(6);
+        private bool _cameraCaptureInProgress;
 
         public MainPage()
         {
@@ -45,7 +46,7 @@ namespace EightBitCamera
 
         private void OnCameraButtonShutterKeyHalfPressed(object sender, EventArgs e)
         {
-            if (_photoCamera == null) 
+            if (_photoCamera == null)
                 return;
 
             try
@@ -65,7 +66,11 @@ namespace EightBitCamera
                 _photoCamera = new PhotoCamera(CameraType.Primary);
                 _photoCamera.Initialized += OnCameraInitialized;
                 _photoCamera.CaptureImageAvailable += OnCameraCaptureImageAvailable;
-                _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;   
+                _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;
+                _photoCamera.CaptureCompleted += OnCameraCaptureCompleted;
+                _photoCamera.CaptureStarted += OnCameraCaptureStarted;
+
+                viewfinderBrush.SetSource(_photoCamera);
             }
             else
             {
@@ -73,11 +78,30 @@ namespace EightBitCamera
             }
         }
 
+        private void OnCameraCaptureStarted(object sender, EventArgs e)
+        {
+            _cameraCaptureInProgress = true;
+        }
+
+        private void OnCameraCaptureCompleted(object sender, CameraOperationCompletedEventArgs e)
+        {
+            _cameraCaptureInProgress = false;
+        }
+
+        private void ShutterButtonClick(object sender, RoutedEventArgs e)
+        {
+            if (_photoCamera == null)
+                return;
+
+            _photoCamera.CaptureImage();
+        }
+
+
         private void OnCameraInitialized(object sender, CameraOperationCompletedEventArgs e)
         {
             // TODO: fix Timer
             int timer = 0;
-            while (timer <= 100)
+            while (true)
             {
                 UpdateViewFinder(null);
                 timer++;
@@ -98,10 +122,18 @@ namespace EightBitCamera
 
         private void UpdateViewFinder(object state)
         {
-            var width = (int) _photoCamera.PreviewResolution.Width;
-            var height = (int) _photoCamera.PreviewResolution.Height;
+            if (_cameraCaptureInProgress)
+                return;
+
+            var width = (int)_photoCamera.PreviewResolution.Width;
+            var height = (int)_photoCamera.PreviewResolution.Height;
             int max = width * height;
             int[] buffer = new int[max];
+
+            //TODO: just before GetPreviewBufferArgb32 to avoid exception, but would be better in beginning of method only. Necesary because of not working with Timer?
+            if (_cameraCaptureInProgress)
+                return;
+
             _photoCamera.GetPreviewBufferArgb32(buffer);
 
             buffer = _pixelator.Pixelate(buffer, width, height);

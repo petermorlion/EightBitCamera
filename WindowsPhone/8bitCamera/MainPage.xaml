@@ -22,7 +22,14 @@
 
         <Image x:Name="bitPreview" Width="570" Height="480"></Image>
         
-        <!--<StackPanel Grid.Column="1">
+        <Canvas Visibility="Collapsed" x:Name="viewfinderCanvas" Width="100" Height="100" HorizontalAlignment="Left">
+            <Canvas.Background>
+                <VideoBrush x:Name="viewfinderBrush" />
+            </Canvas.Background>
+        </Canvas>
+
+
+        <StackPanel Grid.Column="1">
             <Button Click="ShutterButtonClick" BorderThickness="0">
                 <Button.Content>
                     <Image Source="/camera.png"></Image>
@@ -33,7 +40,7 @@
                     <Image Source="/settings.png"></Image>
                 </Button.Content>
             </Button>
-        </StackPanel>-->
+        </StackPanel>
     </Grid>
     <!--<phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
