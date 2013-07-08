@@ -1,5 +1,5 @@
 ﻿<phone:PhoneApplicationPage
-    x:Class="EightBitCamera.Settings"
+    x:Class="EightBitCamera.NumberPicker"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
@@ -14,22 +14,22 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
 
+    <!--LayoutRoot is the root grid where all page content is placed-->
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
+        <!--TitlePanel contains the name of the application and page title-->
         <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Eight Bit Camera" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
+            <TextBlock Text="CHOOSE A NUMBER" Style="{StaticResource PhoneTextNormalStyle}"/>
         </StackPanel>
 
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="Pixelsize" FontSize="26"></TextBlock>
-            <TextBox Text="3" GotFocus="TextBox_GotFocus"></TextBox>
-            <TextBlock Text="Higher numbers mean bigger pixels"></TextBlock>
-        </StackPanel>
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <toolkitPrimitives:LoopingSelector x:Name="loopingSelector"></toolkitPrimitives:LoopingSelector>
+        </Grid>
     </Grid>
 
 </phone:PhoneApplicationPage>

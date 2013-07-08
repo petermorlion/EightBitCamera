@@ -16,5 +16,10 @@ namespace EightBitCamera
         {
             InitializeComponent();
         }
+
+        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/NumberPicker.xaml", UriKind.Relative));
+        }
     }
 }
