@@ -192,7 +192,7 @@ namespace EightBitCamera
             }
         }
 
-        private void SettingsButtonClick(object sender, RoutedEventArgs e)
+        private void SettingsButtonClick(object sender, EventArgs eventArgs)
         {
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
