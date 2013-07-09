@@ -28,7 +28,7 @@
 
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <toolkitPrimitives:LoopingSelector x:Name="loopingSelector"></toolkitPrimitives:LoopingSelector>
+            <toolkitPrimitives:LoopingSelector x:Name="loopingSelector" ItemSize="100,100" />
         </Grid>
     </Grid>
 

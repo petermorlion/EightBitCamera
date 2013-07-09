@@ -31,6 +31,11 @@ namespace EightBitCamera
         private int _minimum = 1;
         private int _maximum = 8;
 
+        public PixelationDataSource()
+        {
+            SelectedItem = 3;
+        }
+
         public object GetNext(object relativeTo)
         {
             int value = (int)relativeTo;
