@@ -1,13 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Navigation;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Controls.Primitives;
-using Microsoft.Phone.Shell;
 
 namespace EightBitCamera
 {
@@ -21,40 +16,16 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            ILoopingSelectorDataSource items = new PixelationDataSource();
+            var minimum = int.Parse(NavigationContext.QueryString["min"]);
+            var maximum = int.Parse(NavigationContext.QueryString["max"]);
+            var selected = int.Parse(NavigationContext.QueryString["selected"]);
+            ILoopingSelectorDataSource items = new IntLoopingDataSource(minimum, maximum, selected);
             loopingSelector.DataSource = items;
         }
-    }
-
-    public class PixelationDataSource : ILoopingSelectorDataSource
-    {
-        private int _minimum = 1;
-        private int _maximum = 8;
-
-        public PixelationDataSource()
+        
+        private void SaveButtonClick(object sender, EventArgs e)
         {
-            SelectedItem = 3;
+            NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
         }
-
-        public object GetNext(object relativeTo)
-        {
-            int value = (int)relativeTo;
-            if (value == _maximum)
-                return _minimum;
-
-            return ++value;
-        }
-
-        public object GetPrevious(object relativeTo)
-        {
-            int value = (int) relativeTo;
-            if (value == _minimum)
-                return _maximum;
-
-            return --value;
-        }
-
-        public object SelectedItem { get; set; }
-        public event EventHandler<SelectionChangedEventArgs> SelectionChanged;
     }
 }

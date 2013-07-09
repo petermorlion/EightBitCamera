@@ -68,6 +68,7 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="IntLoopingDataSource.cs" />
     <Compile Include="NumberPicker.xaml.cs">
       <DependentUpon>NumberPicker.xaml</DependentUpon>
     </Compile>
@@ -87,8 +88,8 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="NumberPicker.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Settings.xaml">
       <SubType>Designer</SubType>
@@ -109,6 +110,7 @@
     </Content>
     <Content Include="camera.png" />
     <Content Include="README_FIRST.txt" />
+    <Content Include="save.png" />
     <Content Include="settings.png" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />

@@ -31,5 +31,10 @@
             <toolkitPrimitives:LoopingSelector x:Name="loopingSelector" ItemSize="100,100" />
         </Grid>
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/save.png" Text="Save" Click="SaveButtonClick"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>

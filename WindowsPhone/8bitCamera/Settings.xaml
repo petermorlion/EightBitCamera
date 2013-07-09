@@ -30,6 +30,7 @@
             <TextBox Text="3" GotFocus="TextBox_GotFocus"></TextBox>
             <TextBlock Text="Higher numbers mean bigger pixels"></TextBlock>
         </StackPanel>
+        
     </Grid>
 
 </phone:PhoneApplicationPage>
