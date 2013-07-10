@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+﻿using System.Windows.Controls;
+using EightBitCamera.Data.Commands;
+using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
-using Microsoft.Phone.Shell;
 
 namespace EightBitCamera
 {
@@ -16,10 +11,29 @@ namespace EightBitCamera
         {
             InitializeComponent();
         }
-
-        private void TextBox_GotFocus(object sender, RoutedEventArgs e)
+        
+        protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
-            NavigationService.Navigate(new Uri("/NumberPicker.xaml?min=1&max=8&selected=3", UriKind.Relative));
+            base.OnNavigatedTo(e);
+            pixelationPicker.Items.Add(3);
+            pixelationPicker.Items.Add(4);
+            pixelationPicker.Items.Add(5);
+            pixelationPicker.Items.Add(6);
+            pixelationPicker.Items.Add(7);
+            pixelationPicker.Items.Add(8);
+            pixelationPicker.Items.Add(9);
+            pixelationPicker.Items.Add(10);
+
+            var currentSetting = new PixelationSizeQuery().Get();
+            pixelationPicker.SelectedItem = currentSetting;
+
+            pixelationPicker.SelectionChanged += OnPixelationChanged;
+        }
+
+        private void OnPixelationChanged(object sender, SelectionChangedEventArgs e)
+        {
+            var command = new PixelationSizeCommand();
+            command.Set(int.Parse(pixelationPicker.SelectedItem.ToString()));
         }
     }
 }

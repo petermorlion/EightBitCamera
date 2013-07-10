@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Microsoft.Xna.Framework.Media;
@@ -26,9 +27,10 @@ namespace EightBitCamera
         private int _savedCounter = 0;
         PhotoCamera _photoCamera;
         readonly MediaLibrary _mediaLibrary = new MediaLibrary();
-        private readonly Pixelator _pixelator = new Pixelator(6);
+        private Pixelator _pixelator;
         private bool _cameraCaptureInProgress;
         private WriteableBitmap _wb;
+        private bool _isCameraInitialized;
 
         public MainPage()
         {
@@ -62,8 +64,11 @@ namespace EightBitCamera
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            _isCameraInitialized = false;
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
+                _pixelator = new Pixelator(new PixelationSizeQuery().Get());
+
                 _photoCamera = new PhotoCamera(CameraType.Primary);
                 _photoCamera.Initialized += OnCameraInitialized;
                 _photoCamera.CaptureImageAvailable += OnCameraCaptureImageAvailable;
@@ -100,6 +105,7 @@ namespace EightBitCamera
 
         private void OnCameraInitialized(object sender, CameraOperationCompletedEventArgs e)
         {
+            _isCameraInitialized = true;
             // TODO: fix Timer
             int timer = 0;
             while (true)
@@ -123,7 +129,7 @@ namespace EightBitCamera
 
         private void UpdateViewFinder(object state)
         {
-            if (_cameraCaptureInProgress)
+            if (_cameraCaptureInProgress || !_isCameraInitialized)
                 return;
 
             var width = (int)_photoCamera.PreviewResolution.Width;
