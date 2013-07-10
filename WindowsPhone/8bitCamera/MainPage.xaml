@@ -26,7 +26,7 @@
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
-            <shell:ApplicationBarIconButton IconUri="/settings.png" Text="Settings" Click="SettingsButtonClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="Settings" Click="SettingsButtonClick"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
  
