@@ -27,7 +27,13 @@
 
         <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <TextBlock Text="Pixelsize" FontSize="26"></TextBlock>
-            <toolkit:ListPicker x:Name="pixelationPicker" FontSize="26" />
+            <toolkit:ListPicker x:Name="pixelationPicker">
+                <toolkit:ListPicker.FullModeItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding}" FontSize="40" Margin="5" />
+                    </DataTemplate>
+                </toolkit:ListPicker.FullModeItemTemplate>
+            </toolkit:ListPicker>
             <TextBlock Text="Higher numbers mean bigger pixels"></TextBlock>
         </StackPanel>
         
