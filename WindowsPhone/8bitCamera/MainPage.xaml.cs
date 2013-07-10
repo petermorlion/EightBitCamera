@@ -6,6 +6,7 @@ using System.Net;
 using System.Threading;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
@@ -35,6 +36,7 @@ namespace EightBitCamera
         public MainPage()
         {
             InitializeComponent();
+
             CameraButtons.ShutterKeyHalfPressed += OnCameraButtonShutterKeyHalfPressed;
             CameraButtons.ShutterKeyPressed += OnCameraButtonShutterKeyPressed;
         }
@@ -108,6 +110,7 @@ namespace EightBitCamera
             _isCameraInitialized = true;
             // TODO: fix Timer
             int timer = 0;
+
             while (true)
             {
                 UpdateViewFinder(null);

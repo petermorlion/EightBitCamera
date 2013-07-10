@@ -104,6 +104,7 @@
     <Content Include="Background.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Images\settings.png" />
+    <Content Include="Images\SplashScreenImage-rotated.jpg" />
     <Content Include="SplashScreenImage.jpg" />
     <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />

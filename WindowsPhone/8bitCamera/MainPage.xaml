@@ -14,8 +14,7 @@
     shell:SystemTray.IsVisible="True">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-
-        <Image x:Name="bitPreview" ></Image>
+        <Image x:Name="bitPreview"></Image>
         
         <Canvas Visibility="Collapsed" x:Name="viewfinderCanvas" Width="100" Height="100" HorizontalAlignment="Left">
             <Canvas.Background>
