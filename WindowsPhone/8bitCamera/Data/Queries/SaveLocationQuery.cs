@@ -7,6 +7,11 @@ namespace EightBitCamera.Data.Queries
         public override SaveLocations Get()
         {
             var settingString = Get(SettingsKeys.SaveLocation);
+            if (settingString == "")
+            {
+                return SaveLocations.CameraRollAndApplicationStorage;
+            }
+
             try
             {
                 return (SaveLocations)Enum.Parse(typeof (SaveLocations), settingString, true);
