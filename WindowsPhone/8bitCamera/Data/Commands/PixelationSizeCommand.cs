@@ -1,6 +1,6 @@
 ﻿namespace EightBitCamera.Data.Commands
 {
-    public class PixelationSizeCommand : IsolatedStorageFileCommand<int>
+    public class PixelationSizeCommand : SettingsCommand<int>
     {
         public override void Set(int value)
         {

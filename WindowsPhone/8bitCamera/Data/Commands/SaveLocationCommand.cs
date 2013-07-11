@@ -1,6 +1,6 @@
 ﻿namespace EightBitCamera.Data.Commands
 {
-    public class SaveLocationCommand : IsolatedStorageFileCommand<SaveLocations>
+    public class SaveLocationCommand : SettingsCommand<SaveLocations>
     {
         public override void Set(SaveLocations value)
         {

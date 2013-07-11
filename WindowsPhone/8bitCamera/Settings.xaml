@@ -36,7 +36,7 @@
                     </DataTemplate>
                 </toolkit:ListPicker.FullModeItemTemplate>
             </toolkit:ListPicker>
-            <TextBlock Text="Higher numbers mean bigger pixels" Style="{StaticResource SettingsDescription}"></TextBlock>
+            <TextBlock Text="Higher numbers mean bigger pixels." Style="{StaticResource SettingsDescription}"></TextBlock>
 
             <TextBlock Text="Save location" Style="{StaticResource SettingsKey}"></TextBlock>
             <toolkit:ListPicker x:Name="saveLocationPicker">

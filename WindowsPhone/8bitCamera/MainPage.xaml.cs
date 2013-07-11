@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Shapes;
+using EightBitCamera.Data;
+using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
@@ -74,7 +76,6 @@ namespace EightBitCamera
                 _photoCamera = new PhotoCamera(CameraType.Primary);
                 _photoCamera.Initialized += OnCameraInitialized;
                 _photoCamera.CaptureImageAvailable += OnCameraCaptureImageAvailable;
-                _photoCamera.CaptureThumbnailAvailable += OnCameraCaptureThumbnailAvailable;
                 _photoCamera.CaptureCompleted += OnCameraCaptureCompleted;
                 _photoCamera.CaptureStarted += OnCameraCaptureStarted;
 
@@ -166,38 +167,24 @@ namespace EightBitCamera
             var fileName = "8bitImage" + _savedCounter + ".jpg";
             try
             {
+                var setting = new SaveLocationQuery().Get();
                 var stream = new MemoryStream();
                 _wb.SaveJpeg(stream, (int)_photoCamera.PreviewResolution.Width, (int)_photoCamera.PreviewResolution.Height, 0, 100);
-                _mediaLibrary.SavePictureToCameraRoll(fileName, stream.ToArray());
+                
+                if (setting == SaveLocations.CameraRoll || setting == SaveLocations.CameraRollAndApplicationStorage)
+                {
+                    _mediaLibrary.SavePictureToCameraRoll(fileName, stream.ToArray());
+                }
+
+                if (setting == SaveLocations.ApplicationStorage || setting == SaveLocations.CameraRollAndApplicationStorage)
+                {
+                    var command = new SaveImageCommand();
+                    command.Save(e.ImageStream, fileName);
+                }
             }
             catch (Exception exception)
             {
                 // TODO: do something with exception?
-            }
-        }
-
-        private void OnCameraCaptureThumbnailAvailable(object sender, ContentReadyEventArgs e)
-        {
-            var fileName = "8bitImage" + _savedCounter + "_th.jpg";
-            try
-            {
-                using (var isolatedStorageFile = IsolatedStorageFile.GetUserStoreForApplication())
-                {
-                    using (var targetStream = isolatedStorageFile.OpenFile(fileName, FileMode.Create, FileAccess.Write))
-                    {
-                        byte[] readBuffer = new byte[4096];
-                        int bytesRead = -1;
-
-                        while ((bytesRead = e.ImageStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
-                        {
-                            targetStream.Write(readBuffer, 0, bytesRead);
-                        }
-                    }
-                }
-            }
-            finally
-            {
-                e.ImageStream.Close();
             }
         }
 

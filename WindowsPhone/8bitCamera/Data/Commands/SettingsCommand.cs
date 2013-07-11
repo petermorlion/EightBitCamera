@@ -3,7 +3,7 @@ using System.IO.IsolatedStorage;
 
 namespace EightBitCamera.Data.Commands
 {
-    public abstract class IsolatedStorageFileCommand<T>
+    public abstract class SettingsCommand<T>
     {
         public abstract void Set(T value);
 
@@ -17,7 +17,14 @@ namespace EightBitCamera.Data.Commands
                 {
                     using (var writer = new StreamWriter(stream))
                     {
-                        writer.WriteLine(value);
+                        byte[] readBuffer = new byte[4096];
+                        int bytesRead = -1;
+
+                        while ((bytesRead = e.ImageStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
+                        {
+                            targetStream.Write(readBuffer, 0, bytesRead);
+                        }
+
                     }
                 }
             }
