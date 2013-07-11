@@ -65,7 +65,9 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Commands\IsolatedStorageFileCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
+    <Compile Include="Data\Commands\SaveLocationCommand.cs" />
     <Compile Include="Data\Queries\IsolatedStorageFileQuery.cs" />
     <Compile Include="Data\Queries\SaveLocationQuery.cs" />
     <Compile Include="Data\SaveLocations.cs" />
