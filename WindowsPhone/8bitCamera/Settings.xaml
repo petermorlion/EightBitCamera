@@ -38,15 +38,7 @@
             </toolkit:ListPicker>
             <TextBlock Text="Higher numbers mean bigger pixels." Style="{StaticResource SettingsDescription}"></TextBlock>
 
-            <TextBlock Text="Save location" Style="{StaticResource SettingsKey}"></TextBlock>
-            <toolkit:ListPicker x:Name="saveLocationPicker">
-                <toolkit:ListPicker.FullModeItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="40" Margin="5" />
-                    </DataTemplate>
-                </toolkit:ListPicker.FullModeItemTemplate>
-            </toolkit:ListPicker>
-            <TextBlock Text="Where to save the pixelated photo." Style="{StaticResource SettingsDescription}"></TextBlock>
+            <CheckBox x:Name="saveToCameraRollCheckBox" Content="Save original image to Camera Roll" />
         </StackPanel>
         
     </Grid>

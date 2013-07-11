@@ -166,20 +166,16 @@ namespace EightBitCamera
             var fileName = "PixImg_" + newSaveCounter + ".jpg";
             try
             {
-                var setting = new SaveLocationQuery().Get();
+                var setting = new SaveToCameraRollQuery().Get();
                 var stream = new MemoryStream();
                 _wb.SaveJpeg(stream, (int)_photoCamera.PreviewResolution.Width, (int)_photoCamera.PreviewResolution.Height, 0, 100);
                 
-                if (setting == SaveLocations.CameraRoll || setting == SaveLocations.CameraRollAndApplicationStorage)
+                if (setting)
                 {
                     _mediaLibrary.SavePictureToCameraRoll(fileName, stream.ToArray());
                 }
 
-                if (setting == SaveLocations.ApplicationStorage || setting == SaveLocations.CameraRollAndApplicationStorage)
-                {
-                    var command = new SaveImageCommand();
-                    command.Save(e.ImageStream, fileName);
-                }
+                _mediaLibrary.SavePicture(fileName, stream.ToArray());
             }
             catch (Exception exception)
             {

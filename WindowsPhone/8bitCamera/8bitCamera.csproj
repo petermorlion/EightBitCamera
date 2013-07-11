@@ -69,11 +69,10 @@
     <Compile Include="Data\Commands\SettingsCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
     <Compile Include="Data\Commands\SaveImageCommand.cs" />
-    <Compile Include="Data\Commands\SaveLocationCommand.cs" />
+    <Compile Include="Data\Commands\SaveToCameraRollCommand.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
-    <Compile Include="Data\Queries\SaveLocationQuery.cs" />
-    <Compile Include="Data\SaveLocations.cs" />
+    <Compile Include="Data\Queries\SaveToCameraRollQuery.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>

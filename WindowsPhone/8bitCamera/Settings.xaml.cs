@@ -1,5 +1,5 @@
-﻿using System.Windows.Controls;
-using EightBitCamera.Data;
+﻿using System.Windows;
+using System.Windows.Controls;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
@@ -33,63 +33,26 @@ namespace EightBitCamera
                 pixelationPicker.Items.Add(10);   
             }
 
-            if (saveLocationPicker.Items.Count == 0)
-            {
-                saveLocationPicker.Items.Add(CameraRoll);
-                saveLocationPicker.Items.Add(ApplicationStorage);
-                saveLocationPicker.Items.Add(CameraRollAndApplicationStorage);
-            }
-
             var currentPixelation = new PixelationSizeQuery().Get();
             pixelationPicker.SelectedItem = currentPixelation;
 
-            var currentSaveLocation = new SaveLocationQuery().Get();
-            saveLocationPicker.SelectedItem = TranslateSaveLocation(currentSaveLocation);
+            var saveToCameraRoll = new SaveToCameraRollQuery().Get();
+            saveToCameraRollCheckBox.IsChecked = saveToCameraRoll;
 
             pixelationPicker.SelectionChanged += OnPixelationChanged;
-            saveLocationPicker.SelectionChanged += OnSaveLocationChanged;
+            saveToCameraRollCheckBox.Checked += OnSaveToCameraRollCheckBoxChecked;
+        }
+
+        private void OnSaveToCameraRollCheckBoxChecked(object sender, RoutedEventArgs e)
+        {
+            var command = new SaveToCameraRollCommand();
+            command.Set(saveToCameraRollCheckBox.IsChecked.HasValue && saveToCameraRollCheckBox.IsChecked.Value);
         }
 
         private void OnPixelationChanged(object sender, SelectionChangedEventArgs e)
         {
             var command = new PixelationSizeCommand();
             command.Set(int.Parse(pixelationPicker.SelectedItem.ToString()));
-        }
-
-        private void OnSaveLocationChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var command = new SaveLocationCommand();
-            command.Set(TranslateSaveLocation(saveLocationPicker.SelectedItem.ToString()));
-        }
-
-        private string TranslateSaveLocation(SaveLocations saveLocation)
-        {
-            switch (saveLocation)
-            {
-                case SaveLocations.CameraRoll:
-                    return CameraRoll;
-                case SaveLocations.ApplicationStorage:
-                    return ApplicationStorage;
-                case SaveLocations.CameraRollAndApplicationStorage:
-                    return CameraRollAndApplicationStorage;
-                default:
-                    return CameraRollAndApplicationStorage;
-            }
-        }
-
-        private SaveLocations TranslateSaveLocation(string saveLocation)
-        {
-            switch (saveLocation)
-            {
-                case CameraRoll:
-                    return SaveLocations.CameraRoll;
-                case ApplicationStorage:
-                    return SaveLocations.ApplicationStorage;
-                case CameraRollAndApplicationStorage:
-                    return SaveLocations.CameraRollAndApplicationStorage;
-                default:
-                    return SaveLocations.CameraRollAndApplicationStorage;
-            }
         }
     }
 }
