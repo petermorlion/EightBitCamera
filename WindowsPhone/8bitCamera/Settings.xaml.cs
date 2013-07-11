@@ -20,18 +20,25 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            pixelationPicker.Items.Add(3);
-            pixelationPicker.Items.Add(4);
-            pixelationPicker.Items.Add(5);
-            pixelationPicker.Items.Add(6);
-            pixelationPicker.Items.Add(7);
-            pixelationPicker.Items.Add(8);
-            pixelationPicker.Items.Add(9);
-            pixelationPicker.Items.Add(10);
 
-            saveLocationPicker.Items.Add(CameraRoll);
-            saveLocationPicker.Items.Add(ApplicationStorage);
-            saveLocationPicker.Items.Add(CameraRollAndApplicationStorage);
+            if (pixelationPicker.Items.Count == 0)
+            {
+                pixelationPicker.Items.Add(3);
+                pixelationPicker.Items.Add(4);
+                pixelationPicker.Items.Add(5);
+                pixelationPicker.Items.Add(6);
+                pixelationPicker.Items.Add(7);
+                pixelationPicker.Items.Add(8);
+                pixelationPicker.Items.Add(9);
+                pixelationPicker.Items.Add(10);   
+            }
+
+            if (saveLocationPicker.Items.Count == 0)
+            {
+                saveLocationPicker.Items.Add(CameraRoll);
+                saveLocationPicker.Items.Add(ApplicationStorage);
+                saveLocationPicker.Items.Add(CameraRollAndApplicationStorage);
+            }
 
             var currentPixelation = new PixelationSizeQuery().Get();
             pixelationPicker.SelectedItem = currentPixelation;
