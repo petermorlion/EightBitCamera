@@ -1,30 +1,17 @@
-﻿using System.IO;
-using System.IO.IsolatedStorage;
-
-namespace EightBitCamera.Data.Queries
+﻿namespace EightBitCamera.Data.Queries
 {
-    public class PixelationSizeQuery
+    public class PixelationSizeQuery : IsolatedStorageFileQuery<int>
     {
-        public int Get()
+        public override int Get()
         {
-            var key = SettingsKeys.PixelationSize.ToString();
-
-            using (var file = IsolatedStorageFile.GetUserStoreForApplication())
+            var settingString = Get(SettingsKeys.PixelationSize);
+            int setting;
+            if (!int.TryParse(settingString, out setting))
             {
-                if (!file.FileExists(key))
-                {
-                    return 8;
-                }
-
-                using (var stream = file.OpenFile(key, FileMode.Open))
-                {
-                    using (var reader = new StreamReader(stream))
-                    {
-                        var settingString = reader.ReadToEnd();
-                        return int.Parse(settingString);
-                    }
-                }
+                return 6;
             }
+
+            return setting;
         }
     }
 }
