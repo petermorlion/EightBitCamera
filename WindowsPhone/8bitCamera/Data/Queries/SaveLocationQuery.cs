@@ -2,7 +2,7 @@
 
 namespace EightBitCamera.Data.Queries
 {
-    public class SaveLocationQuery : IsolatedStorageFileQuery<SaveLocations>
+    public class SaveLocationQuery : SettingsQuery<SaveLocations>
     {
         public override SaveLocations Get()
         {

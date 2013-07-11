@@ -3,7 +3,7 @@ using System.IO.IsolatedStorage;
 
 namespace EightBitCamera.Data.Queries
 {
-    public abstract class IsolatedStorageFileQuery<T>
+    public abstract class SettingsQuery<T>
     {
         public abstract T Get();
 

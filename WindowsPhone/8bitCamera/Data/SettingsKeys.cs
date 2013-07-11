@@ -3,6 +3,7 @@
     public enum SettingsKeys
     {
         PixelationSize,
-        SaveLocation
+        SaveLocation,
+        SaveCounter
     }
 }

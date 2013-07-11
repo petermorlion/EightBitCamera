@@ -1,6 +1,6 @@
 ﻿namespace EightBitCamera.Data.Queries
 {
-    public class PixelationSizeQuery : IsolatedStorageFileQuery<int>
+    public class PixelationSizeQuery : SettingsQuery<int>
     {
         public override int Get()
         {

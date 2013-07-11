@@ -17,14 +17,7 @@ namespace EightBitCamera.Data.Commands
                 {
                     using (var writer = new StreamWriter(stream))
                     {
-                        byte[] readBuffer = new byte[4096];
-                        int bytesRead = -1;
-
-                        while ((bytesRead = e.ImageStream.Read(readBuffer, 0, readBuffer.Length)) > 0)
-                        {
-                            targetStream.Write(readBuffer, 0, bytesRead);
-                        }
-
+                        writer.WriteLine(value);
                     }
                 }
             }

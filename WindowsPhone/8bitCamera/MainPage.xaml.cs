@@ -27,7 +27,6 @@ namespace EightBitCamera
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private int _savedCounter = 0;
         PhotoCamera _photoCamera;
         readonly MediaLibrary _mediaLibrary = new MediaLibrary();
         private Pixelator _pixelator;
@@ -127,7 +126,6 @@ namespace EightBitCamera
                 _photoCamera.Dispose();
 
                 _photoCamera.CaptureImageAvailable -= OnCameraCaptureImageAvailable;
-                _photoCamera.CaptureThumbnailAvailable -= OnCameraCaptureThumbnailAvailable;
             }
         }
 
@@ -164,7 +162,8 @@ namespace EightBitCamera
 
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
         {
-            var fileName = "8bitImage" + _savedCounter + ".jpg";
+            var newSaveCounter = new SaveCounterQuery().Get() + 1;
+            var fileName = "PixImg_" + newSaveCounter + ".jpg";
             try
             {
                 var setting = new SaveLocationQuery().Get();
@@ -186,6 +185,8 @@ namespace EightBitCamera
             {
                 // TODO: do something with exception?
             }
+
+            new SaveCounterCommand().Set(newSaveCounter);
         }
 
         private void SettingsButtonClick(object sender, EventArgs eventArgs)
