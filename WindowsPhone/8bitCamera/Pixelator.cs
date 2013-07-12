@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace EightBitCamera
+﻿namespace EightBitCamera
 {
     public class Pixelator
     {
