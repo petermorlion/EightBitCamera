@@ -1,28 +1,15 @@
 ﻿
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Net;
-using System.Threading;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using EightBitCamera.Data;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
-using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
 using System.IO;
-using System.IO.IsolatedStorage;
 using System.Windows.Media.Imaging;
+using GestureEventArgs = System.Windows.Input.GestureEventArgs;
 
 namespace EightBitCamera
 {
@@ -185,6 +172,17 @@ namespace EightBitCamera
         private void LibraryButtonClick(object sender, EventArgs eventArgs)
         {
             NavigationService.Navigate(new Uri("/Existing.xaml", UriKind.Relative));
+        }
+
+        private void OnBitPreviewTap(object sender, GestureEventArgs e)
+        {
+            if (_photoCamera == null)
+            {
+                return;
+            }
+
+            _photoCamera.Focus();
+            _photoCamera.CaptureImage();
         }
     }
 }
