@@ -25,6 +25,16 @@ namespace ExifLib
             }
         }
 
+        public static JpegInfo ReadJpeg(Stream stream, string fileName)
+        {
+            DateTime now = DateTime.Now;
+            ExifReader reader = new ExifReader(stream);
+            reader.info.FileSize = (int)stream.Length;
+            reader.info.FileName = string.Format("{0}.jpg", fileName);
+            reader.info.LoadTime = DateTime.Now - now;
+            return reader.info;
+        }
+
         protected ExifReader(Stream stream)
         {
             info = new JpegInfo();
