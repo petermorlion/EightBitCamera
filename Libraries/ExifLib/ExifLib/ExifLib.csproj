@@ -49,6 +49,11 @@
     <Reference Include="mscorlib.extensions" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ExifIds.cs" />
+    <Compile Include="ExifIO.cs" />
+    <Compile Include="ExifReader.cs" />
+    <Compile Include="ExifTag.cs" />
+    <Compile Include="JpegInfo.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
