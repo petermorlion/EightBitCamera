@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using EightBitCamera.Data.Queries;
+using ExifLib;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
 
