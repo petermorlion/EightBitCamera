@@ -3,9 +3,12 @@
   <App xmlns="" ProductID="{3be4236a-e5e3-49bb-8cdb-32ef98dd1fec}" Title="EightBitCamera" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="EightBitCamera author" Description="Sample description" Publisher="EightBitCamera">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
-      <Capability Name="ID_CAP_MEDIALIB" />
       <Capability Name="ID_CAP_NETWORKING" />
       <Capability Name="ID_CAP_ISV_CAMERA" />
+      <Capability Name="ID_CAP_MEDIALIB" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_LOCATION" />
     </Capabilities>
     <Tasks>
       <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />

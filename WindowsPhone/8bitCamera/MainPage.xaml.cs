@@ -17,6 +17,7 @@ using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
+using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
 using System.IO;
@@ -95,15 +96,6 @@ namespace EightBitCamera
         {
             _cameraCaptureInProgress = false;
         }
-
-        private void ShutterButtonClick(object sender, RoutedEventArgs e)
-        {
-            if (_photoCamera == null)
-                return;
-
-            _photoCamera.CaptureImage();
-        }
-
 
         private void OnCameraInitialized(object sender, CameraOperationCompletedEventArgs e)
         {
@@ -188,6 +180,11 @@ namespace EightBitCamera
         private void SettingsButtonClick(object sender, EventArgs eventArgs)
         {
             NavigationService.Navigate(new Uri("/Settings.xaml", UriKind.Relative));
+        }
+
+        private void LibraryButtonClick(object sender, EventArgs eventArgs)
+        {
+            NavigationService.Navigate(new Uri("/Existing.xaml", UriKind.Relative));
         }
     }
 }
