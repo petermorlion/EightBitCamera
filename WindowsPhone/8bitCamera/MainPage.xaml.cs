@@ -182,6 +182,7 @@ namespace EightBitCamera
             }
 
             _photoCamera.Focus();
+            // TODO: wait for focus to be completed?
             _photoCamera.CaptureImage();
         }
     }

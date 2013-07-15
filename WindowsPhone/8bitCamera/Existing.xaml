@@ -19,20 +19,28 @@
             <RowDefinition Height="70" />
         </Grid.RowDefinitions>
         <Image x:Name="pixelatedImage" />
-        <ScrollContentPresenter Grid.Row="1">
-            <ScrollContentPresenter.Content>
-                <StackPanel Orientation="Horizontal">
-                    <Button Content="3" />
-                    <Button Content="4" />
-                    <Button Content="5" />
-                    <Button Content="6" />
-                    <Button Content="7" />
-                    <Button Content="8" />
-                    <Button Content="9" />
-                    <Button Content="10" />
-                </StackPanel>
-            </ScrollContentPresenter.Content>
-        </ScrollContentPresenter>
+        <ListBox x:Name="pixelationListBox" Grid.Row="1" FontSize="36" Margin="-4,0,4,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="19, 10" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.Items>
+                <ListBoxItem Content="3" />
+                <ListBoxItem Content="4" />
+                <ListBoxItem Content="5" />
+                <ListBoxItem Content="6" />
+                <ListBoxItem Content="7" />
+                <ListBoxItem Content="8" />
+                <ListBoxItem Content="9" />
+                <ListBoxItem Content="10" />
+            </ListBox.Items>
+        </ListBox>
     </Grid>
 
     <phone:PhoneApplicationPage.ApplicationBar>
