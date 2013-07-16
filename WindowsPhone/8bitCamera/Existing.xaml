@@ -16,7 +16,7 @@
     <Grid x:Name="LayoutRoot" Background="Transparent">
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
-            <RowDefinition Height="70" />
+            <RowDefinition Height="90" />
         </Grid.RowDefinitions>
         <Image x:Name="pixelatedImage" />
         <ListBox x:Name="pixelationListBox" Grid.Row="1" FontSize="36" Margin="-4,0,4,0">
