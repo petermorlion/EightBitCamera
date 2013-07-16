@@ -2,12 +2,12 @@
 {
     public class Pixelator
     {
-        private readonly int _pixelateSize;
-
         public Pixelator(int pixelateSize)
         {
-            _pixelateSize = pixelateSize;
+            PixelateSize = pixelateSize;
         }
+
+        public int PixelateSize { get; set; }
 
         public int[] Pixelate(int[] buffer, int width, int height)
         {
@@ -38,6 +38,9 @@
             // 22 -> 22
             // 23 -> 22
             // 28 -> 22
+
+            var newBuffer = new int[buffer.Length];
+
             for (int i = 0; i < width * height; i++)
             {
                 var y = (int)((double)i / width);
@@ -46,28 +49,28 @@
 
                 var x = 0;
 
-                var isNewPixelatedLine = y % _pixelateSize == 0;
+                var isNewPixelatedLine = y % PixelateSize == 0;
 
                 if (isNewPixelatedLine)
                 {
-                    x = i + (_pixelateSize / 2) - (i % _pixelateSize);
-                    var offsetY = y % _pixelateSize;
-                    offsetX = offsetY + (_pixelateSize / 2) - (offsetY % _pixelateSize);
+                    x = i + (PixelateSize / 2) - (i % PixelateSize);
+                    var offsetY = y % PixelateSize;
+                    offsetX = offsetY + (PixelateSize / 2) - (offsetY % PixelateSize);
                     referencePixel = x + (offsetX * width);
                 }
                 else
                 {
-                    referencePixel = i - ((y % _pixelateSize) * width);
+                    referencePixel = i - ((y % PixelateSize) * width);
                 }
                 
                 // TODO: do something with last line(s)
                 if (referencePixel < buffer.Length)
                 {
-                    buffer[i] = buffer[referencePixel];
+                    newBuffer[i] = buffer[referencePixel];
                 }
             }
 
-            return buffer;
+            return newBuffer;
         }
     }
 }

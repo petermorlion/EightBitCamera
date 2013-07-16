@@ -1,17 +1,20 @@
 ﻿using System;
-using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using EightBitCamera.Data.Queries;
-using ExifLib;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
+using Microsoft.Xna.Framework.Media;
 
 namespace EightBitCamera
 {
     public partial class Existing : PhoneApplicationPage
     {
+        private Pixelator _pixelator;
+        private WriteableBitmap _writableBitmap;
+        private int[] _originalPixels;
+
         public Existing()
         {
             InitializeComponent();
@@ -41,21 +44,41 @@ namespace EightBitCamera
                 pixelationListBox.Items.Add(10);
             }
 
-            // TODO: don't work
-            pixelationListBox.SelectedItem = new PixelationSizeQuery().Get();
+            var pixelateSize = new PixelationSizeQuery().Get();
+            pixelationListBox.SelectedItem = pixelateSize; // TODO: don't work
             pixelationListBox.SelectionChanged += OnPixelationListBoxSelectionChanged;
+            _pixelator = new Pixelator(pixelateSize);
         }
 
         private void OnPhotoChooserTaskCompleted(object sender, PhotoResult e)
         {
-            if (e.ChosenPhoto == null)
+            var stream = e.ChosenPhoto;
+            if (stream == null)
             {
+                // If connected to Zune and debugging (WP7), the PhotoChooserTask won't open so we just pick the first image available.
+#if DEBUG
+                var mediaLibrary = new MediaLibrary();
+                if (mediaLibrary.SavedPictures.Count > 0)
+                {
+                    var firstPicture = mediaLibrary.SavedPictures[0];
+                    stream = firstPicture.GetImage();
+                }
+#else
                 return;
+#endif
             }
 
             var bitmapImage = new BitmapImage();
-            bitmapImage.SetSource(e.ChosenPhoto);
-            pixelatedImage.Source = bitmapImage;
+            bitmapImage.SetSource(stream);
+
+            //TODO: close stream?
+            
+            _writableBitmap = new WriteableBitmap(bitmapImage);
+            pixelatedImage.Source = _writableBitmap;
+            _originalPixels = new int[_writableBitmap.Pixels.Length];
+            _writableBitmap.Pixels.CopyTo(_originalPixels, 0);
+            
+            PixelatedWriteableBitmap();
         }
 
         private void LibraryButtonClick(object sender, EventArgs e)
@@ -68,14 +91,26 @@ namespace EightBitCamera
 
         private void OnPixelationListBoxSelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (e.AddedItems.Count == 0)
+            if (e.AddedItems.Count == 0 || _writableBitmap == null)
             {
                 return;
             }
 
-            var pixelation = int.Parse(((ListBoxItem) e.AddedItems[0]).Content.ToString());
-            var pixelator = new Pixelator(pixelation);
-            // TODO: pixelate it!
+            var pixelateSize = int.Parse(((ListBoxItem)e.AddedItems[0]).Content.ToString());
+            _pixelator.PixelateSize = pixelateSize;
+            PixelatedWriteableBitmap();
+        }
+
+        private void PixelatedWriteableBitmap()
+        {
+            if (_originalPixels == null || _writableBitmap == null)
+            {
+                return;
+            }
+
+            var pixelated = _pixelator.Pixelate(_originalPixels, _writableBitmap.PixelWidth, _writableBitmap.PixelHeight);
+            pixelated.CopyTo(_writableBitmap.Pixels, 0);
+            _writableBitmap.Invalidate();
         }
     }
 }
