@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="ExifLib">
+      <HintPath>..\..\Libraries\ExifLib.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Phone" />
     <Reference Include="Microsoft.Phone.Controls.Toolkit">
       <HintPath>..\packages\WPtoolkit.4.2013.06.11\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
@@ -68,7 +71,6 @@
     <Compile Include="Data\Commands\SaveCounterCommand.cs" />
     <Compile Include="Data\Commands\SettingsCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
-    <Compile Include="Data\Commands\SaveImageCommand.cs" />
     <Compile Include="Data\Commands\SaveToCameraRollCommand.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
