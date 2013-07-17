@@ -47,7 +47,7 @@ namespace EightBitCamera
             var pixelateSize = new PixelationSizeQuery().Get();
             pixelationListBox.SelectedItem = pixelateSize; // TODO: don't work
             pixelationListBox.SelectionChanged += OnPixelationListBoxSelectionChanged;
-            _pixelator = new Pixelator(pixelateSize);
+            _pixelator = new Pixelator(pixelateSize, false);
         }
 
         private void OnPhotoChooserTaskCompleted(object sender, PhotoResult e)

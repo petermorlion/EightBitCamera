@@ -58,7 +58,7 @@ namespace EightBitCamera
             _isCameraInitialized = false;
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
-                _pixelator = new Pixelator(new PixelationSizeQuery().Get());
+                _pixelator = new Pixelator(new PixelationSizeQuery().Get(), true);
 
                 _photoCamera = new PhotoCamera(CameraType.Primary);
                 _photoCamera.Initialized += OnCameraInitialized;

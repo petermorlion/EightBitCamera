@@ -2,12 +2,23 @@
 {
     public class Pixelator
     {
-        public Pixelator(int pixelateSize)
+        /// <summary>
+        /// Creates a new Pixelator instance.
+        /// </summary>
+        /// <param name="pixelateSize">The size of the pixels.</param>
+        /// <param name="sourceIsCameraPreview">
+        /// Set to true if the source will be the camera preview. When using the camera preview, the given buffer is used, because otherwise we get
+        /// strange lines in our image. For an existing image, we need a new buffer so we can 'cache' the original image bytes.
+        /// </param>
+        public Pixelator(int pixelateSize, bool sourceIsCameraPreview)
         {
             PixelateSize = pixelateSize;
+            SourceIsCameraPreview = sourceIsCameraPreview;
         }
 
         public int PixelateSize { get; set; }
+
+        public bool SourceIsCameraPreview { get; set; }
 
         public int[] Pixelate(int[] buffer, int width, int height)
         {
@@ -39,7 +50,10 @@
             // 23 -> 22
             // 28 -> 22
 
-            var newBuffer = new int[buffer.Length];
+            //TODO: truly pixelate (i.e. use the 4 ARGB bytes) to avoid lines and so we can take all bytes into account (now we might lose the edges)
+            //TODO: might want to check if the lines don't also occur on existing images
+
+            var newBuffer = SourceIsCameraPreview ? buffer : new int[buffer.Length];
 
             for (int i = 0; i < width * height; i++)
             {
