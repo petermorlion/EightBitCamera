@@ -10,53 +10,34 @@
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
-    SupportedOrientations="PortraitOrLandscape" Orientation="LandscapeLeft"
+    SupportedOrientations="PortraitOrLandscape"
+    Orientation="LandscapeLeft"
     shell:SystemTray.IsVisible="False"
     OrientationChanged="OnOrientationChanged">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="75"/>
-        </Grid.ColumnDefinitions>
-        <Image x:Name="bitPreview" Tap="OnBitPreviewTap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
-        
-        <Canvas Visibility="Collapsed" x:Name="viewfinderCanvas" Width="100" Height="100" HorizontalAlignment="Left">
+        <Canvas Tap="OnBitPreviewTap">
             <Canvas.Background>
-                <VideoBrush x:Name="viewfinderBrush" />
+                <ImageBrush x:Name="BitPreview">
+                    <ImageBrush.RelativeTransform>
+                        <CompositeTransform x:Name="ViewFinderTransform" CenterX=".5" CenterY=".5" />
+                    </ImageBrush.RelativeTransform>
+                </ImageBrush>
             </Canvas.Background>
         </Canvas>
 
-        <Grid Grid.Column="1" Background="#212021">
-            <StackPanel VerticalAlignment="Center" Margin="0">
-                <HyperlinkButton x:Name="LibraryButton" Grid.Row="0" Click="LibraryButtonClick">
-                    <HyperlinkButton.Template>
-                        <ControlTemplate TargetType="HyperlinkButton">
-                            <Border BorderBrush="White" BorderThickness="3" CornerRadius="40" Margin="12">
-                                <Image Source="/Images/folder.png" Width="46" Height="46" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.RenderTransform>
-                                        <RotateTransform x:Name="folderRotate" CenterX="23" CenterY="23" Angle="{Binding ElementName=rotateAngle, Path=Text}" />
-                                    </Image.RenderTransform>
-                                </Image>
-                            </Border>
-                        </ControlTemplate>
-                    </HyperlinkButton.Template>
-                </HyperlinkButton>
-                <HyperlinkButton Grid.Row="2" Click="SettingsButtonClick">
-                    <HyperlinkButton.Template>
-                        <ControlTemplate TargetType="HyperlinkButton">
-                            <Border BorderBrush="White" BorderThickness="3" CornerRadius="40" Margin="12">
-                                <Image Source="/Images/settings.png" Width="46" Height="46" HorizontalAlignment="Center" VerticalAlignment="Center">
-                                    <Image.RenderTransform>
-                                        <RotateTransform x:Name="settingsRotate" CenterX="23" CenterY="23" />
-                                    </Image.RenderTransform>
-                                </Image>
-                            </Border>
-                        </ControlTemplate>
-                    </HyperlinkButton.Template>
-                </HyperlinkButton>
-            </StackPanel>
-        </Grid>
+        <Canvas Visibility="Collapsed">
+            <Canvas.Background>
+                <VideoBrush x:Name="ViewfinderBrush" />
+            </Canvas.Background>
+        </Canvas>
+        
     </Grid>
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="Settings" Click="SettingsButtonClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Images/folder.png" Text="Library" Click="LibraryButtonClick"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
  
 </phone:PhoneApplicationPage>

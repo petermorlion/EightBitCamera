@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Windows;
+using System.Windows.Media;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
@@ -21,9 +22,7 @@ namespace EightBitCamera
         private bool _cameraCaptureInProgress;
         private WriteableBitmap _wb;
         private bool _isCameraInitialized;
-        private double _screenWidth;
-        private double _screenHeight;
-
+        
         public MainPage()
         {
             InitializeComponent();
@@ -69,7 +68,7 @@ namespace EightBitCamera
                 _photoCamera.CaptureCompleted += OnCameraCaptureCompleted;
                 _photoCamera.CaptureStarted += OnCameraCaptureStarted;
 
-                viewfinderBrush.SetSource(_photoCamera);
+                ViewfinderBrush.SetSource(_photoCamera);
             }
             else
             {
@@ -131,7 +130,7 @@ namespace EightBitCamera
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                 {
                     _wb = new WriteableBitmap(width, height);
-                    bitPreview.Source = _wb;
+                    BitPreview.ImageSource = _wb;
                     buffer.CopyTo(_wb.Pixels, 0);
                     _wb.Invalidate();
                 });
@@ -191,7 +190,21 @@ namespace EightBitCamera
 
         private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
         {
-            
+            switch (e.Orientation)
+            {
+                case PageOrientation.PortraitUp:
+                    ViewFinderTransform.Rotation = 90;
+                    break;
+                case PageOrientation.PortraitDown:
+                    ViewFinderTransform.Rotation = 270;
+                    break;
+                case PageOrientation.LandscapeRight:
+                    ViewFinderTransform.Rotation = 180;
+                    break;
+                default:
+                    ViewFinderTransform.Rotation = 0;
+                    break;
+            }
         }
     }
 }
