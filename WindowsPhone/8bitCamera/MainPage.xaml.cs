@@ -21,6 +21,8 @@ namespace EightBitCamera
         private bool _cameraCaptureInProgress;
         private WriteableBitmap _wb;
         private bool _isCameraInitialized;
+        private double _screenWidth;
+        private double _screenHeight;
 
         public MainPage()
         {
@@ -56,6 +58,7 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _isCameraInitialized = false;
+            
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
                 _pixelator = new Pixelator(new PixelationSizeQuery().Get(), true);
@@ -184,6 +187,37 @@ namespace EightBitCamera
             _photoCamera.Focus();
             // TODO: wait for focus to be completed?
             _photoCamera.CaptureImage();
+        }
+
+        private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
+        {
+            RotateTransform.CenterX = 220;
+            RotateTransform.CenterY = 200;
+            if (e.Orientation == PageOrientation.LandscapeLeft)
+            {
+                RotateTransform.Angle = 0;
+            }
+            else if (e.Orientation == PageOrientation.LandscapeRight)
+            {
+                RotateTransform.Angle = 180;
+            }
+            else if (e.Orientation == PageOrientation.PortraitDown)
+            {
+                RotateTransform.Angle = 90;
+            }
+            else if (e.Orientation == PageOrientation.PortraitUp)
+            {
+                RotateTransform.Angle = 90;
+            }
+
+
+        }
+
+        private void testSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
+        {
+            RotateTransform.CenterX = 220;
+            RotateTransform.CenterY = 200;
+            RotateTransform.Angle = e.NewValue;
         }
     }
 }

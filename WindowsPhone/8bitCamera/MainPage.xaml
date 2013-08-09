@@ -11,16 +11,23 @@
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="LandscapeLeft"
-    shell:SystemTray.IsVisible="True">
+    shell:SystemTray.IsVisible="True"
+    OrientationChanged="OnOrientationChanged">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Image x:Name="bitPreview" Tap="OnBitPreviewTap"></Image>
+        <Image x:Name="bitPreview" Tap="OnBitPreviewTap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Image.RenderTransform>
+                <RotateTransform x:Name="RotateTransform" Angle="0" />
+            </Image.RenderTransform>
+        </Image>
         
         <Canvas Visibility="Collapsed" x:Name="viewfinderCanvas" Width="100" Height="100" HorizontalAlignment="Left">
             <Canvas.Background>
                 <VideoBrush x:Name="viewfinderBrush" />
             </Canvas.Background>
         </Canvas>
+        
+        <Slider x:Name="testSlider" ValueChanged="testSlider_ValueChanged" Minimum="0" Maximum="360"></Slider>
 
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
