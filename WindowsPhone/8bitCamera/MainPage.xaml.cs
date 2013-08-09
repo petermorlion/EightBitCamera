@@ -191,33 +191,7 @@ namespace EightBitCamera
 
         private void OnOrientationChanged(object sender, OrientationChangedEventArgs e)
         {
-            RotateTransform.CenterX = 220;
-            RotateTransform.CenterY = 200;
-            if (e.Orientation == PageOrientation.LandscapeLeft)
-            {
-                RotateTransform.Angle = 0;
-            }
-            else if (e.Orientation == PageOrientation.LandscapeRight)
-            {
-                RotateTransform.Angle = 180;
-            }
-            else if (e.Orientation == PageOrientation.PortraitDown)
-            {
-                RotateTransform.Angle = 90;
-            }
-            else if (e.Orientation == PageOrientation.PortraitUp)
-            {
-                RotateTransform.Angle = 90;
-            }
-
-
-        }
-
-        private void testSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            RotateTransform.CenterX = 220;
-            RotateTransform.CenterY = 200;
-            RotateTransform.Angle = e.NewValue;
+            
         }
     }
 }
