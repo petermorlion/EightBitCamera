@@ -57,6 +57,8 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _isCameraInitialized = false;
+
+            OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
             
             if (PhotoCamera.IsCameraTypeSupported(CameraType.Primary))
             {
