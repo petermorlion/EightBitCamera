@@ -112,5 +112,10 @@ namespace EightBitCamera
             pixelated.CopyTo(_writableBitmap.Pixels, 0);
             _writableBitmap.Invalidate();
         }
+
+        private void SaveButtonClick(object sender, EventArgs e)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

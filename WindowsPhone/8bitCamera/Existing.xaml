@@ -46,6 +46,7 @@
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
             <shell:ApplicationBarIconButton IconUri="/Images/folder.png" Text="Library" Click="LibraryButtonClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Images/save.png" Text="Save" Click="SaveButtonClick"></shell:ApplicationBarIconButton>
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
 </phone:PhoneApplicationPage>
