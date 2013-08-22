@@ -3,7 +3,7 @@
     public enum SettingsKeys
     {
         PixelationSize,
-        SaveToCameraRoll,
+        SaveOriginalToCameraRoll,
         SaveCounter
     }
 }

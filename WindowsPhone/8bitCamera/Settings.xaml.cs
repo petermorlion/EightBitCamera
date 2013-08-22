@@ -36,7 +36,7 @@ namespace EightBitCamera
             var currentPixelation = new PixelationSizeQuery().Get();
             pixelationPicker.SelectedItem = currentPixelation;
 
-            var saveToCameraRoll = new SaveToCameraRollQuery().Get();
+            var saveToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
             saveToCameraRollCheckBox.IsChecked = saveToCameraRoll;
 
             pixelationPicker.SelectionChanged += OnPixelationChanged;
@@ -45,7 +45,7 @@ namespace EightBitCamera
 
         private void OnSaveToCameraRollCheckBoxChecked(object sender, RoutedEventArgs e)
         {
-            var command = new SaveToCameraRollCommand();
+            var command = new SaveOriginalToCameraRollCommand();
             command.Set(saveToCameraRollCheckBox.IsChecked.HasValue && saveToCameraRollCheckBox.IsChecked.Value);
         }
 

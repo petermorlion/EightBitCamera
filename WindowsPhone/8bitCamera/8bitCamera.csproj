@@ -71,10 +71,10 @@
     <Compile Include="Data\Commands\SaveCounterCommand.cs" />
     <Compile Include="Data\Commands\SettingsCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
-    <Compile Include="Data\Commands\SaveToCameraRollCommand.cs" />
+    <Compile Include="Data\Commands\SaveOriginalToCameraRollCommand.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
-    <Compile Include="Data\Queries\SaveToCameraRollQuery.cs" />
+    <Compile Include="Data\Queries\SaveOriginalToCameraRollQuery.cs" />
     <Compile Include="Existing.xaml.cs">
       <DependentUpon>Existing.xaml</DependentUpon>
     </Compile>

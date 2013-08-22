@@ -149,13 +149,13 @@ namespace EightBitCamera
             var fileName = "PixImg_" + newSaveCounter + ".jpg";
             try
             {
-                var setting = new SaveToCameraRollQuery().Get();
+                var saveOriginalToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
                 var stream = new MemoryStream();
                 _wb.SaveJpeg(stream, (int)_photoCamera.PreviewResolution.Width, (int)_photoCamera.PreviewResolution.Height, 0, 100);
                 
-                if (setting)
+                if (saveOriginalToCameraRoll)
                 {
-                    _mediaLibrary.SavePictureToCameraRoll(fileName, stream.ToArray());
+                    _mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
                 }
 
                 _mediaLibrary.SavePicture(fileName, stream.ToArray());
