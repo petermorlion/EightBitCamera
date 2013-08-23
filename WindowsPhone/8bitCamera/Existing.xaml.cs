@@ -4,6 +4,7 @@ using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using Coding4Fun.Toolkit.Controls;
+using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
@@ -126,9 +127,7 @@ namespace EightBitCamera
             var mediaLibrary = new MediaLibrary();
             mediaLibrary.SavePicture(fileName, stream.ToArray());
 
-            var toast = new ToastPrompt();
-            toast.Message = "Saved!";
-            toast.Show();
+            new ShowSavedMessageCommand().Show();
         }
     }
 }

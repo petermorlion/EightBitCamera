@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Media;
+using Coding4Fun.Toolkit.Controls;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
@@ -160,6 +161,8 @@ namespace EightBitCamera
                 }
 
                 _mediaLibrary.SavePicture(fileName, stream.ToArray());
+
+                new ShowSavedMessageCommand().Show();
             }
             catch (Exception exception)
             {
