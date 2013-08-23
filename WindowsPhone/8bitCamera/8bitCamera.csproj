@@ -124,6 +124,7 @@
     <Content Include="Background.png" />
     <Content Include="Images\folder.png" />
     <Content Include="Images\save.png" />
+    <Content Include="Images\upload.png" />
     <Content Include="README_FIRST.txt" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\SplashScreenImage-rotated.jpg" />

@@ -8,6 +8,7 @@ using EightBitCamera.Data.Queries;
 using ExifLib;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
+using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
 using System.IO;
@@ -275,6 +276,12 @@ namespace EightBitCamera
                     ViewFinderTransform.Rotation = 0;
                     break;
             }
+        }
+
+        private void ShareButtonClick(object sender, EventArgs e)
+        {
+            var shareTask = new ShareLinkTask();
+            shareTask.Show();
         }
     }
 }
