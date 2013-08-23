@@ -17,6 +17,7 @@ namespace EightBitCamera
     public partial class MainPage : PhoneApplicationPage
     {
         PhotoCamera _photoCamera;
+        // TODO: performance penalty when keeping reference to MediaLibrary?
         readonly MediaLibrary _mediaLibrary = new MediaLibrary();
         private Pixelator _pixelator;
         private bool _cameraCaptureInProgress;

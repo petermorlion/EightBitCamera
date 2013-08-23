@@ -1,7 +1,9 @@
 ﻿using System;
+using System.IO;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
+using Coding4Fun.Toolkit.Controls;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Tasks;
@@ -115,7 +117,18 @@ namespace EightBitCamera
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
-            throw new NotImplementedException();
+            var newSaveCounter = new SaveCounterQuery().Get() + 1;
+            var fileName = "PixImg_" + newSaveCounter + ".jpg";
+
+            var stream = new MemoryStream();
+            _writableBitmap.SaveJpeg(stream, _writableBitmap.PixelWidth, _writableBitmap.PixelHeight, 0, 100);
+
+            var mediaLibrary = new MediaLibrary();
+            mediaLibrary.SavePicture(fileName, stream.ToArray());
+
+            var toast = new ToastPrompt();
+            toast.Message = "Saved!";
+            toast.Show();
         }
     }
 }
