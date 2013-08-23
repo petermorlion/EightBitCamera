@@ -5,6 +5,7 @@ using System.Windows.Media;
 using Coding4Fun.Toolkit.Controls;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
+using ExifLib;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Microsoft.Xna.Framework.Media;
@@ -153,16 +154,22 @@ namespace EightBitCamera
             {
                 var saveOriginalToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
                 var stream = new MemoryStream();
-                _wb.SaveJpeg(stream, (int)_photoCamera.PreviewResolution.Width, (int)_photoCamera.PreviewResolution.Height, 0, 100);
+                _wb.SaveJpeg(stream, _wb.PixelWidth, _wb.PixelHeight, 0, 100);
+
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                                              {
+                                                                  var rotatedStream = RotateStream(stream);
+
+                                                                   if (saveOriginalToCameraRoll)
+                                                                  {
+                                                                      _mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
+                                                                  }
+
+                                                                  _mediaLibrary.SavePicture(fileName, rotatedStream.ToArray());
+
+                                                                  new ShowSavedMessageCommand().Show();
+                                                              });
                 
-                if (saveOriginalToCameraRoll)
-                {
-                    _mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
-                }
-
-                _mediaLibrary.SavePicture(fileName, stream.ToArray());
-
-                new ShowSavedMessageCommand().Show();
             }
             catch (Exception exception)
             {
@@ -170,6 +177,63 @@ namespace EightBitCamera
             }
 
             new SaveCounterCommand().Set(newSaveCounter);
+        }
+
+        private MemoryStream RotateStream(MemoryStream stream)
+        {
+            var angle = 0;
+            switch (Orientation)
+            {
+                case PageOrientation.PortraitUp:
+                    angle = 90;
+                    break;
+                case PageOrientation.LandscapeRight:
+                    angle = 180;
+                    break;
+            }
+
+            if (angle == 0)
+                return stream;
+
+            stream.Position = 0;
+            if (angle % 90 != 0 || angle < 0) throw new ArgumentException();
+            if (angle % 360 == 0) return stream;
+
+            BitmapImage bitmap = new BitmapImage();
+            bitmap.SetSource(stream);
+            WriteableBitmap wbSource = new WriteableBitmap(bitmap);
+
+            WriteableBitmap wbTarget = null;
+            if (angle % 180 == 0)
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelWidth, wbSource.PixelHeight);
+            }
+            else
+            {
+                wbTarget = new WriteableBitmap(wbSource.PixelHeight, wbSource.PixelWidth);
+            }
+
+            for (int x = 0; x < wbSource.PixelWidth; x++)
+            {
+                for (int y = 0; y < wbSource.PixelHeight; y++)
+                {
+                    switch (angle % 360)
+                    {
+                        case 90:
+                            wbTarget.Pixels[(wbSource.PixelHeight - y - 1) + x * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 180:
+                            wbTarget.Pixels[(wbSource.PixelWidth - x - 1) + (wbSource.PixelHeight - y - 1) * wbSource.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                        case 270:
+                            wbTarget.Pixels[y + (wbSource.PixelWidth - x - 1) * wbTarget.PixelWidth] = wbSource.Pixels[x + y * wbSource.PixelWidth];
+                            break;
+                    }
+                }
+            }
+            MemoryStream targetStream = new MemoryStream();
+            wbTarget.SaveJpeg(targetStream, wbTarget.PixelWidth, wbTarget.PixelHeight, 0, 100);
+            return targetStream;
         }
 
         private void SettingsButtonClick(object sender, EventArgs eventArgs)
