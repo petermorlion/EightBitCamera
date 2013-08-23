@@ -37,7 +37,7 @@
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
             <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="Settings" Click="SettingsButtonClick"></shell:ApplicationBarIconButton>
             <shell:ApplicationBarIconButton IconUri="/Images/folder.png" Text="Library" Click="LibraryButtonClick"></shell:ApplicationBarIconButton>
-            <shell:ApplicationBarIconButton IconUri="/Images/upload.png" Text="Share" Click="ShareButtonClick"></shell:ApplicationBarIconButton>
+            <!--<shell:ApplicationBarIconButton IconUri="/Images/upload.png" Text="Share" Click="ShareButtonClick"></shell:ApplicationBarIconButton>-->
         </shell:ApplicationBar>
     </phone:PhoneApplicationPage.ApplicationBar>
  
