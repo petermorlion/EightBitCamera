@@ -34,7 +34,7 @@ namespace EightBitCamera
                 ConsumerKey = TwitterSettings.ConsumerKey,
                 ConsumerSecret = TwitterSettings.ConsumerSecret,
                 Version = TwitterSettings.OAuthVersion,
-                CallbackUrl = "oob",
+                CallbackUrl = TwitterSettings.CallbackUri
             };
 
             var client = new RestClient
@@ -142,7 +142,7 @@ namespace EightBitCamera
                 Path = "/access_token"
             };
 
-            client.BeginRequest(request, new RestCallback(RequestAccessTokenCompleted));
+            client.BeginRequest(request, RequestAccessTokenCompleted);
         }
 
         private void RequestAccessTokenCompleted(RestRequest request, RestResponse response, object userstate)
