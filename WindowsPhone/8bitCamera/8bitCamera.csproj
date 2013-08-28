@@ -59,13 +59,37 @@
       <HintPath>..\packages\WPtoolkit.4.2013.06.11\lib\sl4-windowsphone71\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Phone.Interop" />
+    <Reference Include="Microsoft.Practices.Prism">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\Microsoft.Practices.Prism.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Xna.Framework" />
+    <Reference Include="oAuthConnection">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\oAuthConnection.dll</HintPath>
+    </Reference>
+    <Reference Include="SearchEngine">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\SearchEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="Streaminvi">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\Streaminvi.dll</HintPath>
+    </Reference>
     <Reference Include="System.Windows" />
     <Reference Include="system" />
     <Reference Include="System.Core" />
     <Reference Include="System.Net" />
     <Reference Include="System.Xml" />
     <Reference Include="mscorlib.extensions" />
+    <Reference Include="TweetinCore">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\TweetinCore.dll</HintPath>
+    </Reference>
+    <Reference Include="Tweetinvi">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\Tweetinvi.dll</HintPath>
+    </Reference>
+    <Reference Include="TwitterToken">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\TwitterToken.dll</HintPath>
+    </Reference>
+    <Reference Include="UILibrary">
+      <HintPath>..\packages\TweetinviAPI.0.8.1.0\lib\UILibrary.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.xaml.cs">
@@ -125,7 +149,6 @@
     <Content Include="Images\folder.png" />
     <Content Include="Images\save.png" />
     <Content Include="Images\upload.png" />
-    <Content Include="README_FIRST.txt" />
     <Content Include="Images\settings.png" />
     <Content Include="Images\SplashScreenImage-rotated.jpg" />
     <Content Include="SplashScreenImage.jpg" />
@@ -134,7 +157,6 @@
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
