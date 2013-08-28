@@ -3,6 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:phonecontrols="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls"
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -14,32 +15,30 @@
     mc:Ignorable="d"
     shell:SystemTray.IsVisible="True">
     
-    <phone:PhoneApplicationPage.Resources></phone:PhoneApplicationPage.Resources>
-
     <Grid x:Name="LayoutRoot" Background="Transparent">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
+        <phonecontrols:Pivot Title="Settings">
+            <phonecontrols:Pivot.Items>
+                <phonecontrols:PivotItem Header="General">
+                    <phonecontrols:PivotItem.Content>
+                        <Grid>
+                            <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+                                <TextBlock Text="Pixelsize" Style="{StaticResource SettingsKey}"></TextBlock>
+                                <toolkit:ListPicker x:Name="pixelationPicker">
+                                    <toolkit:ListPicker.FullModeItemTemplate>
+                                        <DataTemplate>
+                                            <TextBlock Text="{Binding}" FontSize="40" Margin="5" />
+                                        </DataTemplate>
+                                    </toolkit:ListPicker.FullModeItemTemplate>
+                                </toolkit:ListPicker>
+                                <TextBlock Text="Higher numbers mean bigger pixels." Style="{StaticResource SettingsDescription}"></TextBlock>
 
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Eight Bit Camera" Style="{StaticResource PhoneTextNormalStyle}"/>
-            <TextBlock Text="Settings" Margin="9,-7,0,0" Style="{StaticResource PhoneTextTitle1Style}"/>
-        </StackPanel>
-
-        <StackPanel x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
-            <TextBlock Text="Pixelsize" Style="{StaticResource SettingsKey}"></TextBlock>
-            <toolkit:ListPicker x:Name="pixelationPicker">
-                <toolkit:ListPicker.FullModeItemTemplate>
-                    <DataTemplate>
-                        <TextBlock Text="{Binding}" FontSize="40" Margin="5" />
-                    </DataTemplate>
-                </toolkit:ListPicker.FullModeItemTemplate>
-            </toolkit:ListPicker>
-            <TextBlock Text="Higher numbers mean bigger pixels." Style="{StaticResource SettingsDescription}"></TextBlock>
-
-            <CheckBox x:Name="saveToCameraRollCheckBox" Content="Save original image to Camera Roll" />
-        </StackPanel>
+                                <CheckBox x:Name="saveToCameraRollCheckBox" Content="Save original image to Camera Roll" />
+                            </StackPanel>
+                        </Grid>
+                    </phonecontrols:PivotItem.Content>
+                </phonecontrols:PivotItem>
+            </phonecontrols:Pivot.Items>
+        </phonecontrols:Pivot>
         
     </Grid>
 
