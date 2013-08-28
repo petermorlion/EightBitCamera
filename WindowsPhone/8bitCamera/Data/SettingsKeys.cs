@@ -4,6 +4,7 @@
     {
         PixelationSize,
         SaveOriginalToCameraRoll,
-        SaveCounter
+        SaveCounter,
+        TwitterUser
     }
 }

@@ -75,14 +75,18 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Commands\TwitterUserCommand.cs" />
     <Compile Include="Data\Commands\SaveCounterCommand.cs" />
     <Compile Include="Data\Commands\SettingsCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
     <Compile Include="Data\Commands\SaveOriginalToCameraRollCommand.cs" />
     <Compile Include="Data\Commands\ShowSavedMessageCommand.cs" />
+    <Compile Include="Data\Queries\TwitterUserQuery.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
     <Compile Include="Data\Queries\SaveOriginalToCameraRollQuery.cs" />
+    <Compile Include="Data\TwitterSettings.cs" />
+    <Compile Include="Data\TwitterUser.cs" />
     <Compile Include="Existing.xaml.cs">
       <DependentUpon>Existing.xaml</DependentUpon>
     </Compile>
@@ -97,6 +101,9 @@
     </Compile>
     <Compile Include="Data\SettingsKeys.cs" />
     <Compile Include="Data\Queries\PixelationSizeQuery.cs" />
+    <Compile Include="TwitterAuthentication.xaml.cs">
+      <DependentUpon>TwitterAuthentication.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -112,6 +119,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TwitterAuthentication.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

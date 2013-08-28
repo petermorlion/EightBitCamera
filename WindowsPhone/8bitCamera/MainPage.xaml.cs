@@ -14,15 +14,6 @@ namespace EightBitCamera
 {
     public partial class MainPage : PhoneApplicationPage
     {
-        private const string ConsumerKey = "0Z5ENxmtKve6taZPtog2Q";
-        private const string ConsumerSecret = "aXdNTUWAa7ELvG3A3NtkNBEaei2zX2iP9p7WRri8k";
-
-        private const string RequestTokenUri = "https://api.twitter.com/oauth/request_token";
-        private const string AuthorizeUri = "https://api.twitter.com/oauth/authorize";
-        private const string AccessTokenUri = "https://api.twitter.com/oauth/access_token";
-        private const string CallbackUri = "http://www.google.com";   // we've mentioned Google.com as our callback URL.
-        private const string OAuthVersion = "1.0a";
-
         PhotoCamera _photoCamera;
         // TODO: performance penalty when keeping reference to MediaLibrary?
         readonly MediaLibrary _mediaLibrary = new MediaLibrary();

@@ -37,6 +37,16 @@
                         </Grid>
                     </phonecontrols:PivotItem.Content>
                 </phonecontrols:PivotItem>
+                <phonecontrols:PivotItem Header="Twitter">
+                    <StackPanel>
+                        <TextBlock TextWrapping="Wrap">Allow this app to share your photos with Twitter</TextBlock>
+                        <Button HorizontalAlignment="Center" Padding="60, 4" Click="OnAllowButtonClick">Allow</Button>
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock>Current user: </TextBlock>
+                            <TextBlock x:Name="TwitterUserTextBlock" />
+                        </StackPanel>
+                    </StackPanel>
+                </phonecontrols:PivotItem>
             </phonecontrols:Pivot.Items>
         </phonecontrols:Pivot>
         

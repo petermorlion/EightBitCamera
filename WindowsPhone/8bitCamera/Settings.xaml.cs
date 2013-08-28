@@ -1,4 +1,5 @@
-﻿using System.Windows;
+﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
@@ -39,6 +40,9 @@ namespace EightBitCamera
             var saveToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
             saveToCameraRollCheckBox.IsChecked = saveToCameraRoll;
 
+            var currentTwitterUser = new TwitterUserQuery().Get().ScreenName;
+            TwitterUserTextBlock.Text = currentTwitterUser;
+
             pixelationPicker.SelectionChanged += OnPixelationChanged;
             saveToCameraRollCheckBox.Checked += OnSaveToCameraRollCheckBoxChecked;
         }
@@ -53,6 +57,11 @@ namespace EightBitCamera
         {
             var command = new PixelationSizeCommand();
             command.Set(int.Parse(pixelationPicker.SelectedItem.ToString()));
+        }
+
+        private void OnAllowButtonClick(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/TwitterAuthentication.xaml", UriKind.Relative));
         }
     }
 }
