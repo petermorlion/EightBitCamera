@@ -275,6 +275,15 @@ namespace EightBitCamera
 
         private void ShareButtonClick(object sender, EventArgs e)
         {
+            var twitterUserQuery = new TwitterUserQuery();
+            var twitterUser = twitterUserQuery.Get();
+            if (twitterUser == null)
+            {
+                NavigationService.Navigate(new Uri("/TwitterAuthentication.xaml", UriKind.Relative));
+                return;
+            }
+
+            NavigationService.Navigate(new Uri("/TweetPhoto.xaml", UriKind.Relative));
         }
     }
 }

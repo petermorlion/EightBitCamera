@@ -32,7 +32,7 @@ namespace EightBitCamera
                 SignatureMethod = OAuthSignatureMethod.HmacSha1,
                 ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
                 ConsumerKey = TwitterSettings.ConsumerKey,
-                ConsumerSecret = TwitterSettings.ConsumerSecret,
+                ConsumerSecret = TwitterSettings.ConsumerKeySecret,
                 Version = TwitterSettings.OAuthVersion,
                 CallbackUrl = TwitterSettings.CallbackUri
             };
@@ -124,7 +124,7 @@ namespace EightBitCamera
                 SignatureMethod = OAuthSignatureMethod.HmacSha1,
                 ParameterHandling = OAuthParameterHandling.HttpAuthorizationHeader,
                 ConsumerKey = TwitterSettings.ConsumerKey,
-                ConsumerSecret = TwitterSettings.ConsumerSecret,
+                ConsumerSecret = TwitterSettings.ConsumerKeySecret,
                 Token = _oAuthToken,
                 TokenSecret = _oAuthTokenSecret,
                 Verifier = requestVerifier

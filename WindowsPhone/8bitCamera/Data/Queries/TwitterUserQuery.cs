@@ -11,7 +11,7 @@ namespace EightBitCamera.Data.Queries
             {
                 if (!file.FileExists(SettingsKeys.TwitterUser.ToString()))
                 {
-                    return new TwitterUser();
+                    return null;
                 }
 
                 using (var stream = file.OpenFile(SettingsKeys.TwitterUser.ToString(), FileMode.Open))

@@ -40,8 +40,11 @@ namespace EightBitCamera
             var saveToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
             saveToCameraRollCheckBox.IsChecked = saveToCameraRoll;
 
-            var currentTwitterUser = new TwitterUserQuery().Get().ScreenName;
-            TwitterUserTextBlock.Text = currentTwitterUser;
+            var twitterUser = new TwitterUserQuery().Get();
+            if (twitterUser != null)
+            {
+                TwitterUserTextBlock.Text = twitterUser.ScreenName;
+            }
 
             pixelationPicker.SelectionChanged += OnPixelationChanged;
             saveToCameraRollCheckBox.Checked += OnSaveToCameraRollCheckBoxChecked;

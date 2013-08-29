@@ -103,6 +103,9 @@
     </Compile>
     <Compile Include="Data\SettingsKeys.cs" />
     <Compile Include="Data\Queries\PixelationSizeQuery.cs" />
+    <Compile Include="TweetPhoto.xaml.cs">
+      <DependentUpon>TweetPhoto.xaml</DependentUpon>
+    </Compile>
     <Compile Include="TwitterAuthentication.xaml.cs">
       <DependentUpon>TwitterAuthentication.xaml</DependentUpon>
     </Compile>
@@ -121,6 +124,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="TweetPhoto.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

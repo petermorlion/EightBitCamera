@@ -81,7 +81,7 @@ namespace EightBitCamera
             _originalPixels = new int[_writableBitmap.Pixels.Length];
             _writableBitmap.Pixels.CopyTo(_originalPixels, 0);
             
-            PixelatedWriteableBitmap();
+            PixelateWriteableBitmap();
         }
 
         private void LibraryButtonClick(object sender, EventArgs e)
@@ -101,10 +101,10 @@ namespace EightBitCamera
 
             var pixelateSize = int.Parse(((ListBoxItem)e.AddedItems[0]).Content.ToString());
             _pixelator.PixelateSize = pixelateSize;
-            PixelatedWriteableBitmap();
+            PixelateWriteableBitmap();
         }
 
-        private void PixelatedWriteableBitmap()
+        private void PixelateWriteableBitmap()
         {
             if (_originalPixels == null || _writableBitmap == null)
             {
