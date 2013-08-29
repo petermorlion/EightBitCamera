@@ -39,14 +39,14 @@ namespace EightBitCamera
 
             var client = new RestClient
             {
-                Authority = "https://api.twitter.com/oauth",
+                Authority = TwitterSettings.TwitterOAuthUri,
                 Credentials = credentials,
                 HasElevatedPermissions = true
             };
 
             var request = new RestRequest
             {
-                Path = "/request_token"
+                Path = TwitterSettings.RequestTokenPath
             };
             client.BeginRequest(request, TwitterRequestTokenCompleted);
         }
@@ -55,7 +55,7 @@ namespace EightBitCamera
         {
             _oAuthToken = GetQueryParameter(response.Content, "oauth_token");
             _oAuthTokenSecret = GetQueryParameter(response.Content, "oauth_token_secret");
-            var authorizeUrl = TwitterSettings.AuthorizeUri + "?oauth_token=" + _oAuthToken;
+            var authorizeUrl = TwitterSettings.TwitterOAuthUri + TwitterSettings.AuthorizePath + "?oauth_token=" + _oAuthToken;
 
             if (string.IsNullOrEmpty(_oAuthToken) || string.IsNullOrEmpty(_oAuthTokenSecret))
             {
@@ -139,7 +139,7 @@ namespace EightBitCamera
 
             var request = new RestRequest
             {
-                Path = "/access_token"
+                Path = TwitterSettings.AccessTokenPath
             };
 
             client.BeginRequest(request, RequestAccessTokenCompleted);

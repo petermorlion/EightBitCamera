@@ -86,6 +86,7 @@
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
     <Compile Include="Data\Queries\SaveOriginalToCameraRollQuery.cs" />
     <Compile Include="Data\TwitterSettings.cs" />
+    <Compile Include="Data\TwitterSettings.ignore.cs" />
     <Compile Include="Data\TwitterUser.cs" />
     <Compile Include="Existing.xaml.cs">
       <DependentUpon>Existing.xaml</DependentUpon>
