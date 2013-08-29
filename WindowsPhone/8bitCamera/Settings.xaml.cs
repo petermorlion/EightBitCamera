@@ -63,5 +63,13 @@ namespace EightBitCamera
         {
             NavigationService.Navigate(new Uri("/TwitterAuthentication.xaml", UriKind.Relative));
         }
+
+        private void OnResetButtonClick(object sender, RoutedEventArgs e)
+        {
+            var command = new ClearTwitterUserCommand();
+            command.Execute();
+            TwitterUserTextBlock.Text = "";
+            // TODO: confirmation
+        }
     }
 }

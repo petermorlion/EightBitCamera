@@ -75,6 +75,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\Commands\ClearTwitterUserCommand.cs" />
     <Compile Include="Data\Commands\TwitterUserCommand.cs" />
     <Compile Include="Data\Commands\SaveCounterCommand.cs" />
     <Compile Include="Data\Commands\SettingsCommand.cs" />

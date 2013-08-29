@@ -45,6 +45,7 @@
                             <TextBlock Margin="0, 0, 20, 0">Current user:</TextBlock>
                             <TextBlock x:Name="TwitterUserTextBlock" />
                         </StackPanel>
+                        <Button HorizontalAlignment="Center" Padding="60, 4" Click="OnResetButtonClick">Reset</Button>
                     </StackPanel>
                 </phonecontrols:PivotItem>
             </phonecontrols:Pivot.Items>
