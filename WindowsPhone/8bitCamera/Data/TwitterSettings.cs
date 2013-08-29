@@ -1,10 +1,9 @@
 ﻿namespace EightBitCamera.Data
 {
-    public class TwitterSettings
+    public partial class TwitterSettings
     {
-        public const string ConsumerKey = "0Z5ENxmtKve6taZPtog2Q";
-        public const string ConsumerSecret = "aXdNTUWAa7ELvG3A3NtkNBEaei2zX2iP9p7WRri8k";
-        
+        public const string ConsumerKey = "MFszN6wBwlqy8gOS2Tgjw";
+
         public const string RequestTokenUri = "https://api.twitter.com/oauth/request_token";
         public const string AuthorizeUri = "https://api.twitter.com/oauth/authorize";
         public const string AccessTokenUri = "https://api.twitter.com/oauth/access_token";
