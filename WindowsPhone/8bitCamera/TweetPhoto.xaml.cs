@@ -1,6 +1,8 @@
 ﻿using System;
+using System.IO;
 using System.Linq;
 using System.Net;
+using System.Text;
 using System.Windows;
 using System.Windows.Media.Imaging;
 using EightBitCamera.Data;
@@ -17,6 +19,8 @@ namespace EightBitCamera
     {
         private readonly RestClient _client;
         private readonly OAuthCredentials _credentials;
+        private Picture _latestPicture;
+        private OAuthCredentials _twitPicCredentials;
 
         public TweetPhoto()
         {
@@ -33,7 +37,7 @@ namespace EightBitCamera
                 ConsumerSecret = TwitterSettings.ConsumerKeySecret,
                 Token = twitterUser.AccessToken,
                 TokenSecret = twitterUser.AccessTokenSecret,
-                Version = TwitterSettings.OAuthVersion,
+                Version = TwitterSettings.OAuthVersion
             };
 
             _client = new RestClient
@@ -43,29 +47,30 @@ namespace EightBitCamera
             };
 
             var mediaLibrary = new MediaLibrary();
-            var latestPicture = mediaLibrary.Pictures.Where(x => x.Name.Contains("PixImg_")).OrderByDescending(x => x.Date).FirstOrDefault();
-            if (latestPicture == null)
+            _latestPicture = mediaLibrary.Pictures.Where(x => x.Name.Contains("PixImg_")).OrderByDescending(x => x.Date).FirstOrDefault();
+            if (_latestPicture == null)
             {
                 // TODO handle case where no pictures have been taken yet
             }
 
             var bitmapImage = new BitmapImage();
-            bitmapImage.SetSource(latestPicture.GetImage());
+            bitmapImage.SetSource(_latestPicture.GetImage());
             Image.Source = bitmapImage;
         }
 
         private void OnTweetButtonClicked(object sender, RoutedEventArgs e)
         {
-            var request = new RestRequest
+            var twitterRequest = new RestRequest
             {
                 Credentials = _credentials,
-                Path = "/1.1/statuses/update.json",
+                Path = "/1.1/statuses/update_with_media.json",
                 Method = WebMethod.Post
             };
 
-            request.AddParameter("status", TweetTextBox.Text);
+            twitterRequest.AddParameter("status", TweetTextBox.Text);
+            twitterRequest.AddFile("media[]", _latestPicture.Name, _latestPicture.GetImage(), "image/jpeg");
 
-            _client.BeginRequest(request, new RestCallback(NewTweetCompleted));
+            _client.BeginRequest(twitterRequest, NewTweetCompleted);
         }
 
         private void NewTweetCompleted(RestRequest request, RestResponse response, object userstate)
