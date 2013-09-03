@@ -19,8 +19,7 @@ namespace EightBitCamera
     {
         private readonly RestClient _client;
         private readonly OAuthCredentials _credentials;
-        private Picture _latestPicture;
-        private OAuthCredentials _twitPicCredentials;
+        private readonly Picture _latestPicture;
 
         public TweetPhoto()
         {

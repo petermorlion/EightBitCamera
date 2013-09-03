@@ -85,12 +85,10 @@
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
     <Compile Include="Data\Commands\SaveOriginalToCameraRollCommand.cs" />
     <Compile Include="Data\Commands\ShowSavedMessageCommand.cs" />
-    <Compile Include="Data\TwitPicSettings.ignore.cs" />
     <Compile Include="Data\Queries\TwitterUserQuery.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
     <Compile Include="Data\Queries\SaveOriginalToCameraRollQuery.cs" />
-    <Compile Include="Data\TwitPicSettings.cs" />
     <Compile Include="Data\TwitterSettings.cs" />
     <Compile Include="Data\TwitterSettings.ignore.cs" />
     <Compile Include="Data\TwitterUser.cs" />
