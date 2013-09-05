@@ -42,6 +42,7 @@
                 <shell:ApplicationBarIconButton IconUri="/Images/upload.png" Text="Share latest" Click="ShareButtonClick"></shell:ApplicationBarIconButton>
             </shell:ApplicationBar.Buttons>
             <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="Rate and review" Click="RateMenuItemClick"></shell:ApplicationBarMenuItem>
                 <shell:ApplicationBarMenuItem Text="About 8cam" Click="AboutMenuItemClick"></shell:ApplicationBarMenuItem>
             </shell:ApplicationBar.MenuItems>
         </shell:ApplicationBar>

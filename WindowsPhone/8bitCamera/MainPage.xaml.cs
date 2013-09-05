@@ -4,6 +4,7 @@ using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
+using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
 using System.IO;
@@ -289,6 +290,12 @@ namespace EightBitCamera
         private void AboutMenuItemClick(object sender, EventArgs e)
         {
             NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
+        }
+
+        private void RateMenuItemClick(object sender, EventArgs e)
+        {
+            var task = new MarketplaceReviewTask();
+            task.Show();
         }
     }
 }
