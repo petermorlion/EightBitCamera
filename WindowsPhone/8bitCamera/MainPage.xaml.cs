@@ -285,5 +285,10 @@ namespace EightBitCamera
 
             NavigationService.Navigate(new Uri("/TweetPhoto.xaml", UriKind.Relative));
         }
+
+        private void AboutMenuItemClick(object sender, EventArgs e)
+        {
+            NavigationService.Navigate(new Uri("/About.xaml", UriKind.Relative));
+        }
     }
 }
