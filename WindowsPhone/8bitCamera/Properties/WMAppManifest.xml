@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2009/deployment" AppPlatformVersion="7.1">
-  <App xmlns="" ProductID="{3be4236a-e5e3-49bb-8cdb-32ef98dd1fec}" Title="8Cam" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Peter Morlion" Description="A camera app that mimicks an 8bit camera image (or at least, very pixelated)." Publisher="Peter Morlion" BitsPerPixel="16">
+  <App xmlns="" ProductID="{3be4236a-e5e3-49bb-8cdb-32ef98dd1fec}" Title="8cam" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="Peter Morlion" Description="A camera app that mimicks an 8bit camera image (or at least, with large pixels)." Publisher="Peter Morlion" BitsPerPixel="16">
     <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_NETWORKING" />
