@@ -21,7 +21,7 @@
         </Grid.RowDefinitions>
         
         <!--<ProgressBar x:Name="ProgressBar" VerticalAlignment="Top" IsIndeterminate="False" Visibility="Collapsed" Style="{StaticResource PerformanceProgressBar}"/>-->
-        
+        <ProgressBar x:Name="ProgressBar" VerticalAlignment="Top" IsIndeterminate="False" Visibility="Collapsed"/>
         <!--TitlePanel contains the name of the application and page title-->
         <StackPanel x:Name="TitlePanel" Grid.Row="0" Margin="12,17,0,28">
             <TextBlock x:Name="ApplicationTitle" Text="Twitter Authorization" Style="{StaticResource PhoneTextNormalStyle}"/>

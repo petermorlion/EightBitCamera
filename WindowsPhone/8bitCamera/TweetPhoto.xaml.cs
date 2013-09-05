@@ -57,7 +57,7 @@ namespace EightBitCamera
             Image.Source = bitmapImage;
         }
 
-        private void OnTweetButtonClicked(object sender, RoutedEventArgs e)
+        private void OnTweetButtonClicked(object sender, EventArgs e)
         {
             var twitterRequest = new RestRequest
             {
@@ -95,7 +95,7 @@ namespace EightBitCamera
             });
         }
 
-        private void OnCancelButtonClicked(object sender, RoutedEventArgs e)
+        private void OnCancelButtonClicked(object sender, EventArgs e)
         {
             if (NavigationService.CanGoBack)
             {

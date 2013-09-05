@@ -81,20 +81,20 @@ namespace EightBitCamera
 
         private void OnTwitterBrowserNavigated(object sender, NavigationEventArgs e)
         {
-            //ProgressBar.IsIndeterminate = false;
-            //ProgressBar.Visibility = Visibility.Collapsed;
+            ProgressBar.IsIndeterminate = false;
+            ProgressBar.Visibility = Visibility.Collapsed;
         }
 
         private void OnTwitterBrowserNavigating(object sender, NavigatingEventArgs e)
         {
-            //ProgressBar.IsIndeterminate = true;
-            //ProgressBar.Visibility = Visibility.Visible;
+            ProgressBar.IsIndeterminate = true;
+            ProgressBar.Visibility = Visibility.Visible;
 
-            //if (e.Uri.AbsoluteUri.CompareTo("https://api.twitter.com/oauth/authorize") == 0)
-            //{
-            //    ProgressBar.IsIndeterminate = true;
-            //    ProgressBar.Visibility = Visibility.Visible;
-            //}
+            if (e.Uri.AbsoluteUri.CompareTo("https://api.twitter.com/oauth/authorize") == 0)
+            {
+                ProgressBar.IsIndeterminate = true;
+                ProgressBar.Visibility = Visibility.Visible;
+            }
 
             if (!e.Uri.AbsoluteUri.Contains(TwitterSettings.CallbackUri))
                 return;

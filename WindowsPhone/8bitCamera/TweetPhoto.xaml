@@ -20,29 +20,23 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <!--TitlePanel contains the name of the application and page title-->
-        <StackPanel Grid.Row="0" Margin="12,17,0,28">
-            <TextBlock Text="Tweet" Style="{StaticResource PhoneTextNormalStyle}"/>
-        </StackPanel>
-
         <!--ContentPanel - place additional content here-->
         <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
             <Grid.RowDefinitions>
                 <RowDefinition />
                 <RowDefinition Height="75" />
-                <RowDefinition Height="75" />
+                <RowDefinition Height="25" />
             </Grid.RowDefinitions>
             <Image x:Name="Image" />
             <TextBox x:Name="TweetTextBox" TextWrapping="Wrap" Grid.Row="1"/>
-            <Grid Grid.Row="2">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition />
-                    <ColumnDefinition />
-                </Grid.ColumnDefinitions>
-                <Button Content="Tweet" Grid.Column="0" Click="OnTweetButtonClicked" />
-                <Button Content="Cancel" Grid.Column="1" Click="OnCancelButtonClicked" />
-            </Grid>
         </Grid>
     </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="False" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Check.png" Text="Send" Click="OnTweetButtonClicked"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Toolkit.Content/ApplicationBar.Cancel.png" Text="Cancel" Click="OnCancelButtonClicked"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
 
 </phone:PhoneApplicationPage>
