@@ -19,7 +19,7 @@
         <TemplateType5>
           <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
           <Count>0</Count>
-          <Title>EightBitCamera</Title>
+          <Title>8cam</Title>
         </TemplateType5>
       </PrimaryToken>
     </Tokens>
