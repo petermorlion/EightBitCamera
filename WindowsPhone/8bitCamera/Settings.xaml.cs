@@ -9,10 +9,6 @@ namespace EightBitCamera
 {
     public partial class Settings : PhoneApplicationPage
     {
-        private const string CameraRoll = "Camera Roll";
-        private const string ApplicationStorage = "Application";
-        private const string CameraRollAndApplicationStorage = "Camera Roll and application";
-
         public Settings()
         {
             InitializeComponent();
@@ -48,12 +44,19 @@ namespace EightBitCamera
 
             pixelationPicker.SelectionChanged += OnPixelationChanged;
             saveToCameraRollCheckBox.Checked += OnSaveToCameraRollCheckBoxChecked;
+            saveToCameraRollCheckBox.Unchecked += OnSaveToCameraRollCheckBoxUnchecked;
         }
 
         private void OnSaveToCameraRollCheckBoxChecked(object sender, RoutedEventArgs e)
         {
             var command = new SaveOriginalToCameraRollCommand();
-            command.Set(saveToCameraRollCheckBox.IsChecked.HasValue && saveToCameraRollCheckBox.IsChecked.Value);
+            command.Set(true);
+        }
+
+        private void OnSaveToCameraRollCheckBoxUnchecked(object sender, RoutedEventArgs e)
+        {
+            var command = new SaveOriginalToCameraRollCommand();
+            command.Set(false);
         }
 
         private void OnPixelationChanged(object sender, SelectionChangedEventArgs e)
