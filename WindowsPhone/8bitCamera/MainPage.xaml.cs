@@ -4,6 +4,7 @@ using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
+using Microsoft.Phone.Shell;
 using Microsoft.Phone.Tasks;
 using Microsoft.Xna.Framework.Media;
 using System.Windows.Navigation;
@@ -59,6 +60,13 @@ namespace EightBitCamera
         {
             _isCameraInitialized = false;
             _isTrial = new IsTrialQuery().Get();
+
+            if (_isTrial)
+            {
+                var menuItem = new ApplicationBarMenuItem("Buy full version");
+                menuItem.Click += (sender, args) => Deployment.Current.Dispatcher.BeginInvoke(() => new MarketplaceDetailTask().Show());
+                ApplicationBar.MenuItems.Add(menuItem);
+            }
 
             OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
             
