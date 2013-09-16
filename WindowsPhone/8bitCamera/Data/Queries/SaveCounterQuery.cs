@@ -7,7 +7,7 @@
             int value;
             if (!int.TryParse(Get(SettingsKeys.SaveCounter), out value))
             {
-                return 1;
+                return 0;
             }
 
             return value;

@@ -22,6 +22,7 @@ namespace EightBitCamera
         private bool _cameraCaptureInProgress;
         private WriteableBitmap _wb;
         private bool _isCameraInitialized;
+        private bool _isTrial;
 
         public MainPage()
         {
@@ -57,6 +58,7 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _isCameraInitialized = false;
+            _isTrial = new IsTrialQuery().Get();
 
             OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
             
@@ -146,6 +148,20 @@ namespace EightBitCamera
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
         {
             var newSaveCounter = new SaveCounterQuery().Get() + 1;
+            if (newSaveCounter > 20 && _isTrial)
+            {
+                Deployment.Current.Dispatcher.BeginInvoke(() =>
+                                                              {
+                                                                  var messageBoxResult = MessageBox.Show("The trial version of this app is limited to taking 20 images. Thanks for trying out 8cam! Press OK to buy the full version.", "Trial", MessageBoxButton.OKCancel);
+                                                                  if (messageBoxResult == MessageBoxResult.OK)
+                                                                  {
+                                                                      new MarketplaceDetailTask().Show();
+                                                                  }
+                                                              });
+                
+                return;
+            }
+
             var fileName = "PixImg_" + newSaveCounter + ".jpg";
             try
             {
