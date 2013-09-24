@@ -156,11 +156,11 @@ namespace EightBitCamera
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
         {
             var newSaveCounter = new SaveCounterQuery().Get() + 1;
-            if (newSaveCounter > 20 && _isTrial)
+            if (newSaveCounter > 10 && _isTrial)
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
                                                               {
-                                                                  var messageBoxResult = MessageBox.Show("The trial version of this app is limited to taking 20 images. Thanks for trying out 8cam! Press OK to buy the full version.", "Trial", MessageBoxButton.OKCancel);
+                                                                  var messageBoxResult = MessageBox.Show("The trial version of this app is limited to taking 10 images. Thanks for trying out 8cam! Press OK to buy the full version.", "Trial", MessageBoxButton.OKCancel);
                                                                   if (messageBoxResult == MessageBoxResult.OK)
                                                                   {
                                                                       new MarketplaceDetailTask().Show();
