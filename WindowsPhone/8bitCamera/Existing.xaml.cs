@@ -26,8 +26,7 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
-            // TODO: only show chooser first time. If user doesn't select a picture and goes back, show placeholder
-            if (pixelatedImage.Source == null)
+            if (pixelatedImage.Source == null && e.IsNavigationInitiator)
             {
                 var task = new PhotoChooserTask();
                 task.Completed += OnPhotoChooserTaskCompleted;
