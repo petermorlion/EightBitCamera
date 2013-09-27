@@ -1,0 +1,53 @@
+﻿<phone:PhoneApplicationPage
+    x:Class="EightBitCamera.Existing"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="PortraitOrLandscape" Orientation="Landscape"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="90" />
+        </Grid.RowDefinitions>
+        <Image x:Name="pixelatedImage" />
+        <Slider x:Name="sliderDebug" Minimum="-500000" Maximum="-1" Value="-100000" />
+        <ListBox x:Name="pixelationListBox" Grid.Row="1" FontSize="36" Margin="-4,0,4,0">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal"></StackPanel>
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemContainerStyle>
+                <Style TargetType="ListBoxItem">
+                    <Setter Property="Padding" Value="19, 10" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+            <ListBox.Items>
+                <ListBoxItem Content="3" />
+                <ListBoxItem Content="4" />
+                <ListBoxItem Content="5" />
+                <ListBoxItem Content="6" />
+                <ListBoxItem Content="7" />
+                <ListBoxItem Content="8" />
+                <ListBoxItem Content="9" />
+                <ListBoxItem Content="10" />
+            </ListBox.Items>
+        </ListBox>
+    </Grid>
+
+    <phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Minimized">
+            <shell:ApplicationBarIconButton IconUri="/Images/folder.png" Text="Library" Click="LibraryButtonClick"></shell:ApplicationBarIconButton>
+            <shell:ApplicationBarIconButton IconUri="/Images/save.png" Text="Save" Click="SaveButtonClick"></shell:ApplicationBarIconButton>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>
+</phone:PhoneApplicationPage>
