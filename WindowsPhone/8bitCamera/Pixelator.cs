@@ -50,9 +50,6 @@
             // 23 -> 22
             // 28 -> 22
 
-            //TODO: truly pixelate (i.e. use the 4 ARGB bytes) to avoid lines and so we can take all bytes into account (now we might lose the edges)
-            //TODO: might want to check if the lines don't also occur on existing images
-
             var newBuffer = SourceIsCameraPreview ? buffer : new int[buffer.Length];
 
             for (int i = 0; i < width * height; i++)
