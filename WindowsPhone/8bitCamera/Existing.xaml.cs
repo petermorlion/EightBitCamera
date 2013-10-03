@@ -1,5 +1,6 @@
 ﻿using System;
 using System.IO;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
@@ -117,6 +118,12 @@ namespace EightBitCamera
 
         private void SaveButtonClick(object sender, EventArgs e)
         {
+            if (_writableBitmap == null)
+            {
+                MessageBox.Show("Please select an image from your library.", "No image selected", MessageBoxButton.OK);
+                return;
+            }
+
             var newSaveCounter = new SaveCounterQuery().Get() + 1;
             var fileName = "PixImg_" + newSaveCounter + ".jpg";
 
