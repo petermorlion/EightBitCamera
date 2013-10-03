@@ -39,7 +39,7 @@
                 It only adds to that authentic old-school feeling!
             </TextBlock>
             <TextBlock Margin="0, 50, 0, 0">
-                Version: 1.1.2
+                Version: 1.2.0
             </TextBlock>
         </StackPanel>
     </Grid>
