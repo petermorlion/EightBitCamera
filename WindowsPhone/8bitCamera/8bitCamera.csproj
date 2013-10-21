@@ -81,13 +81,25 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\FeedbackOverlay.xaml.cs">
+      <DependentUpon>FeedbackOverlay.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Data\AppResources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>AppResources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Data\Commands\ClearTwitterUserCommand.cs" />
+    <Compile Include="Data\Commands\ReviewedCommand.cs" />
+    <Compile Include="Data\Commands\LaunchCountCommand.cs" />
     <Compile Include="Data\Commands\TwitterUserCommand.cs" />
     <Compile Include="Data\Commands\SaveCounterCommand.cs" />
     <Compile Include="Data\Commands\SettingsCommand.cs" />
     <Compile Include="Data\Commands\PixelationSizeCommand.cs" />
     <Compile Include="Data\Commands\SaveOriginalToCameraRollCommand.cs" />
     <Compile Include="Data\Commands\ShowSavedMessageCommand.cs" />
+    <Compile Include="Data\Queries\ReviewedQuery.cs" />
+    <Compile Include="Data\Queries\LaunchCountQuery.cs" />
     <Compile Include="Data\Queries\IsTrialQuery.cs" />
     <Compile Include="Data\Queries\TwitterUserQuery.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
@@ -99,6 +111,8 @@
     <Compile Include="Existing.xaml.cs">
       <DependentUpon>Existing.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\FeedbackHelper.cs" />
+    <Compile Include="Helpers\FeedbackState.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -124,6 +138,10 @@
     <Page Include="About.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\FeedbackOverlay.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Existing.xaml">
       <SubType>Designer</SubType>
@@ -166,6 +184,12 @@
     <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
     <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Data\AppResources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.$(TargetFrameworkProfile).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\Silverlight for Phone\$(TargetFrameworkVersion)\Microsoft.Silverlight.CSharp.targets" />

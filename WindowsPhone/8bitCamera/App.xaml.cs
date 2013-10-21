@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using EightBitCamera.Helpers;
 using Microsoft.Phone.Controls;
 using Microsoft.Phone.Shell;
 
@@ -66,6 +67,7 @@ namespace EightBitCamera
         // This code will not execute when the application is reactivated
         private void Application_Launching(object sender, LaunchingEventArgs e)
         {
+            FeedbackHelper.Default.Launching();
         }
 
         // Code to execute when the application is activated (brought to foreground)

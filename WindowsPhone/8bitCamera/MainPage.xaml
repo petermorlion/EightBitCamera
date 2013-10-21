@@ -6,7 +6,7 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d" d:DesignWidth="728" d:DesignHeight="480"
+    xmlns:Controls="clr-namespace:EightBitCamera.Controls" mc:Ignorable="d" d:DesignWidth="728" d:DesignHeight="480"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
@@ -33,6 +33,8 @@
         </Canvas>
         
         <phone:WebBrowser x:Name="TwitterBrowser" Visibility="Collapsed" />
+
+        <Controls:FeedbackOverlay EnableAnimation="True" />
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">
