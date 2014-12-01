@@ -2,6 +2,7 @@
 using System.Windows;
 using EightBitCamera.Data.Commands;
 using EightBitCamera.Data.Queries;
+using EightBitCamera.Data;
 using Microsoft.Phone.Controls;
 using Microsoft.Devices;
 using Microsoft.Phone.Shell;
@@ -25,7 +26,7 @@ namespace EightBitCamera
         private bool _cameraCaptureInProgress;
         private WriteableBitmap _wb;
         private bool _isCameraInitialized;
-        private bool _isTrial;
+        private ApplicationMode _applicationMode;
 
         public MainPage()
         {
@@ -61,9 +62,9 @@ namespace EightBitCamera
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             _isCameraInitialized = false;
-            _isTrial = new IsTrialQuery().Get();
+            _applicationMode = new ApplicationModeQuery().Get();
 
-            if (_isTrial)
+            if (_applicationMode == ApplicationMode.Trial)
             {
                 var menuItem = new ApplicationBarMenuItem("Buy full version");
                 menuItem.Click += (sender, args) => Deployment.Current.Dispatcher.BeginInvoke(() => new MarketplaceDetailTask().Show());
@@ -158,20 +159,29 @@ namespace EightBitCamera
         private void OnCameraCaptureImageAvailable(object sender, ContentReadyEventArgs e)
         {
             var newSaveCounter = new SaveCounterQuery().Get() + 1;
-            if (newSaveCounter > 10 && _isTrial)
+            if (newSaveCounter > 10 && _applicationMode == ApplicationMode.Trial)
             {
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
-                                                              {
-                                                                  var messageBoxResult = MessageBox.Show("The trial version of this app is limited to taking 10 images. Thanks for trying out 8cam! Press OK to buy the full version.", "Trial", MessageBoxButton.OKCancel);
-                                                                  if (messageBoxResult == MessageBoxResult.OK)
-                                                                  {
-                                                                      new MarketplaceDetailTask().Show();
-                                                                  }
-                                                              });
+                {
+                    var messageBoxResult = MessageBox.Show("The trial version of this app is limited to taking 10 images. Thanks for trying out 8cam! Press OK to buy the full version, or Cancel to continue with ads.", "Trial", MessageBoxButton.OKCancel);
+                    if (messageBoxResult == MessageBoxResult.OK)
+                    {
+                        new MarketplaceDetailTask().Show();
+                    }
+                    else
+                    {
+                        SavePicture(newSaveCounter, e.ImageStream);
+                    }
+                });
                 
                 return;
             }
 
+            SavePicture(newSaveCounter, e.ImageStream);
+        }
+
+        private void SavePicture(int newSaveCounter, Stream imageStream)
+        {
             var fileName = "PixImg_" + newSaveCounter + ".jpg";
             try
             {
@@ -180,19 +190,19 @@ namespace EightBitCamera
                 _wb.SaveJpeg(stream, _wb.PixelWidth, _wb.PixelHeight, 0, 100);
 
                 Deployment.Current.Dispatcher.BeginInvoke(() =>
-                                                              {
-                                                                  var rotatedStream = RotateStream(stream);
+                {
+                    var rotatedStream = RotateStream(stream);
 
-                                                                   if (saveOriginalToCameraRoll)
-                                                                  {
-                                                                      _mediaLibrary.SavePictureToCameraRoll(fileName, e.ImageStream);
-                                                                  }
+                    if (saveOriginalToCameraRoll)
+                    {
+                        _mediaLibrary.SavePictureToCameraRoll(fileName, imageStream);
+                    }
 
-                                                                  _mediaLibrary.SavePicture(fileName, rotatedStream.ToArray());
+                    _mediaLibrary.SavePicture(fileName, rotatedStream.ToArray());
 
-                                                                  new ShowSavedMessageCommand().Show();
-                                                              });
-                
+                    new ShowSavedMessageCommand().Show();
+                });
+
             }
             catch (Exception exception)
             {

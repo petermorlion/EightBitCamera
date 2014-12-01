@@ -118,6 +118,7 @@
     <Compile Include="Controls\FeedbackOverlay.xaml.cs">
       <DependentUpon>FeedbackOverlay.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Data\ApplicationMode.cs" />
     <Compile Include="Data\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -132,7 +133,7 @@
     <Compile Include="Data\Commands\ShowSavedMessageCommand.cs" />
     <Compile Include="Data\Queries\ReviewedQuery.cs" />
     <Compile Include="Data\Queries\LaunchCountQuery.cs" />
-    <Compile Include="Data\Queries\IsTrialQuery.cs" />
+    <Compile Include="Data\Queries\ApplicationModeQuery.cs" />
     <Compile Include="Data\Queries\SettingsQuery.cs" />
     <Compile Include="Data\Queries\SaveCounterQuery.cs" />
     <Compile Include="Data\Queries\SaveOriginalToCameraRollQuery.cs" />
