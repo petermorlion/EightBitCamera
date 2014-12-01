@@ -6,16 +6,22 @@
     xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    xmlns:Controls="clr-namespace:EightBitCamera.Controls" mc:Ignorable="d" d:DesignWidth="728" d:DesignHeight="480"
+    xmlns:Controls="clr-namespace:EightBitCamera.Controls" 
+    xmlns:adRotator="clr-namespace:AdRotator;assembly=AdRotator"
+    mc:Ignorable="d" d:DesignWidth="728" d:DesignHeight="480"
     FontFamily="{StaticResource PhoneFontFamilyNormal}"
     FontSize="{StaticResource PhoneFontSizeNormal}"
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape"
-    Orientation="LandscapeLeft"
+    Orientation="Portrait"
     shell:SystemTray.IsVisible="False"
     OrientationChanged="OnOrientationChanged">
 
     <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
         <Canvas Tap="OnBitPreviewTap">
             <Canvas.Background>
                 <ImageBrush x:Name="BitPreview">
@@ -33,6 +39,14 @@
         </Canvas>
 
         <Controls:FeedbackOverlay EnableAnimation="True" />
+        
+        <!--<Controls:Ads x:Name="Ads"/>-->
+        <adRotator:AdRotatorControl x:Name="AdRotatorControl" 
+                                    AdHeight="90"
+		                            AdWidth="728"
+		                            LocalSettingsLocation="defaultAdSettings.xml"
+		                            AutoStartAds="True"
+                                    Grid.Row="1"/>
     </Grid>
     <phone:PhoneApplicationPage.ApplicationBar>
         <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True" Mode="Default">

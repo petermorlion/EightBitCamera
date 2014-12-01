@@ -53,7 +53,7 @@ namespace EightBitCamera
             {
                 _photoCamera.Focus();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 //TODO: catch correct exception (if it exists)
             }
@@ -69,6 +69,12 @@ namespace EightBitCamera
                 var menuItem = new ApplicationBarMenuItem("Buy full version");
                 menuItem.Click += (sender, args) => Deployment.Current.Dispatcher.BeginInvoke(() => new MarketplaceDetailTask().Show());
                 ApplicationBar.MenuItems.Add(menuItem);
+            }
+
+            if (_applicationMode == ApplicationMode.Ads)
+            {
+                AdRotatorControl.IsEnabled = true;
+                AdRotatorControl.Invalidate(null);
             }
 
             OnOrientationChanged(this, new OrientationChangedEventArgs(Orientation));
@@ -150,7 +156,7 @@ namespace EightBitCamera
                     _wb.Invalidate();
                 });
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 // TODO: catch more specific exception if possible  
             }
