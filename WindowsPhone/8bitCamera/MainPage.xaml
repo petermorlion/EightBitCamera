@@ -31,8 +31,6 @@
                 <VideoBrush x:Name="ViewfinderBrush" />
             </Canvas.Background>
         </Canvas>
-        
-        <phone:WebBrowser x:Name="TwitterBrowser" Visibility="Collapsed" />
 
         <Controls:FeedbackOverlay EnableAnimation="True" />
     </Grid>
@@ -41,7 +39,7 @@
             <shell:ApplicationBar.Buttons>
                 <shell:ApplicationBarIconButton IconUri="/Images/settings.png" Text="Settings" Click="SettingsButtonClick"></shell:ApplicationBarIconButton>
                 <shell:ApplicationBarIconButton IconUri="/Images/folder.png" Text="Library" Click="LibraryButtonClick"></shell:ApplicationBarIconButton>
-                <shell:ApplicationBarIconButton IconUri="/Images/twitter.png" Text="Tweet latest" Click="ShareButtonClick"></shell:ApplicationBarIconButton>
+                <shell:ApplicationBarIconButton IconUri="/Images/share.png" Text="Share latest" Click="ShareButtonClick"></shell:ApplicationBarIconButton>
             </shell:ApplicationBar.Buttons>
             <shell:ApplicationBar.MenuItems>
                 <shell:ApplicationBarMenuItem Text="Rate and review" Click="RateMenuItemClick"></shell:ApplicationBarMenuItem>

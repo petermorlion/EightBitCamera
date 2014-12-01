@@ -11,6 +11,8 @@ using System.Windows.Navigation;
 using System.IO;
 using System.Windows.Media.Imaging;
 using GestureEventArgs = System.Windows.Input.GestureEventArgs;
+using System.Linq;
+using Microsoft.Xna.Framework.Media.PhoneExtensions;
 
 namespace EightBitCamera
 {
@@ -300,15 +302,17 @@ namespace EightBitCamera
 
         private void ShareButtonClick(object sender, EventArgs e)
         {
-            var twitterUserQuery = new TwitterUserQuery();
-            var twitterUser = twitterUserQuery.Get();
-            if (twitterUser == null)
-            {
-                NavigationService.Navigate(new Uri("/TwitterAuthentication.xaml", UriKind.Relative));
+            var mediaLibrary = new MediaLibrary();
+            var latestPicture = mediaLibrary.Pictures.Where(x => x.Name.Contains("PixImg_")).OrderByDescending(x => x.Date).FirstOrDefault();
+            if (latestPicture == null)
                 return;
-            }
 
-            NavigationService.Navigate(new Uri("/TweetPhoto.xaml", UriKind.Relative));
+            var shareMediaTask = new ShareMediaTask
+            {
+                FilePath = latestPicture.GetPath(),
+            };
+
+            shareMediaTask.Show();
         }
 
         private void AboutMenuItemClick(object sender, EventArgs e)

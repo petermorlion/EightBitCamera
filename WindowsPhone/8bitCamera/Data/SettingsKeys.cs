@@ -5,7 +5,6 @@
         PixelationSize,
         SaveOriginalToCameraRoll,
         SaveCounter,
-        TwitterUser,
         LaunchCount,
         Reviewed
     }

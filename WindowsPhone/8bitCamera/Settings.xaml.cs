@@ -36,12 +36,6 @@ namespace EightBitCamera
             var saveToCameraRoll = new SaveOriginalToCameraRollQuery().Get();
             saveToCameraRollCheckBox.IsChecked = saveToCameraRoll;
 
-            var twitterUser = new TwitterUserQuery().Get();
-            if (twitterUser != null)
-            {
-                TwitterUserTextBlock.Text = twitterUser.ScreenName;
-            }
-
             pixelationPicker.SelectionChanged += OnPixelationChanged;
             saveToCameraRollCheckBox.Checked += OnSaveToCameraRollCheckBoxChecked;
             saveToCameraRollCheckBox.Unchecked += OnSaveToCameraRollCheckBoxUnchecked;
@@ -63,19 +57,6 @@ namespace EightBitCamera
         {
             var command = new PixelationSizeCommand();
             command.Set(int.Parse(pixelationPicker.SelectedItem.ToString()));
-        }
-
-        private void OnAllowButtonClick(object sender, RoutedEventArgs e)
-        {
-            NavigationService.Navigate(new Uri("/TwitterAuthentication.xaml", UriKind.Relative));
-        }
-
-        private void OnResetButtonClick(object sender, RoutedEventArgs e)
-        {
-            var command = new ClearTwitterUserCommand();
-            command.Execute();
-            TwitterUserTextBlock.Text = "";
-            // TODO: confirmation
         }
     }
 }
